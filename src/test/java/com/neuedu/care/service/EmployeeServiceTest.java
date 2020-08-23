@@ -52,14 +52,14 @@ class EmployeeServiceTest {
 	/**
 	 * 多条件模糊查询
 	 */
-//	@Test
-//	void test_fingCondition() {
-//		String name = "y";
-//		List<Employee> employees = employeeService.fingCondition(null, name, "");
-//		for (Employee employee : employees) {
-//			log.info(employee.toString());
-//		}
-//	}
+	@Test
+	void test_findCondition() {
+		String ename = "y";
+		List<Employee> employees = employeeService.findCondition(10001, "", "");
+		for (Employee employee : employees) {
+			log.info(employee.toString());
+		}
+	}
 	
 	/**
 	 * 新增员工
@@ -107,11 +107,12 @@ class EmployeeServiceTest {
 //	}
 	
 	/**
-	 * 
+	 * 测试删除
 	 */
-	@Test
-	void test_delete() {
-		int line = employeeService.delete(10009);
-		log.info(line+"删除成功");
-	}
+//	@Test
+//	void test_delete() {
+//		int line = employeeService.delete(10009);
+//		log.info(line+"删除成功");
+//	}
+
 }

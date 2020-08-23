@@ -1,8 +1,5 @@
 package com.neuedu.care.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,17 +24,17 @@ public class EmployeeServiceImpl implements EmployeeService {
  * 实现login方法
  */
 	@Override
-	public Employee login(Integer eid, String password) {
-		if (StringUtils.isBlank(eid.toString())||StringUtils.isBlank(password)) {
+	public Employee login(Integer eid, String epassword) {
+		if (StringUtils.isBlank(eid.toString())||StringUtils.isBlank(epassword)) {
 			return null;
 		}
 		if (eid.toString().length() != 5) {
 			return null;
 		}
-		if (password.length() < 6) {
+		if (epassword.length() < 6) {
 			return null;
 		}
-		Employee employee = employeeRepository.findByEidAndPassword(eid, password);
+		Employee employee = employeeRepository.findByEidAndPassword(eid, epassword);
 		return employee;
 	}
 	/**
@@ -60,14 +57,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 	 * 实现多条件查询
 	 */
 	@Override
-	public List<Employee> fingCondition(Integer eid, String name, String position) {
-		List<Employee> employees = employeeRepository.findByEidOrNameContainingOrPosition(eid, name, position);
+	public List<Employee> findCondition(Integer eid, String ename, String position) {
+
+		List<Employee> employees = employeeRepository.findByEidOrEnameContainingOrPosition(eid, ename, position);
 		return employees;
 	}
 	@Override
-	public int update(Integer eid, String name, String sex, Integer age, String IDnumber, String telephone,
-			String address, Date worktime, Integer workage, String position) {
-		int line = employeeRepository.update(eid, name, sex, age, IDnumber, telephone, address, worktime, workage, position);
+	public int update(Integer eid, String ename, String esex, Integer eage, String eIDnumber, String etelephone,
+			String eaddress, Date worktime, Integer workage, String position) {
+		int line = employeeRepository.update(eid, ename, esex, eage, eIDnumber, etelephone, eaddress, worktime, workage, position);
 		return line;
 	}
 	@Override
@@ -81,6 +79,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return line;
 	}
-
-	
+	@Override
+	public Employee findByEid(Integer eid) {
+		Employee employee = employeeRepository.findByEid(eid);
+		return employee;
+	}	
 }

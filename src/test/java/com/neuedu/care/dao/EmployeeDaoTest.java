@@ -1,6 +1,5 @@
 package com.neuedu.care.dao;
 
-import static org.hamcrest.CoreMatchers.nullValue;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.text.ParseException;
@@ -56,9 +55,9 @@ class EmployeeDaoTest {
 	@Test
 	void test_findByEidOrNameLikeOrPositionn() {
 		Integer eid = new Integer("10001");
-		String name = "mm";
+		String ename = "mm";
 		String position = "医生";
-		List<Employee> employees = employeeRepository.findByEidOrNameContainingOrPosition(10002,"mm","管理员");
+		List<Employee> employees = employeeRepository.findByEidOrEnameContainingOrPosition(null,"y","");
 		for (Employee employee : employees) {
 			log.info(employee.toString());
 		}
@@ -122,5 +121,5 @@ class EmployeeDaoTest {
 //		int line = employeeRepository.update(eid, name, sex, age, IDnumber, telephone, address, worktime, workage, position);
 //		log.info(line+"更新成功");
 //	}
-		
+	
 }
