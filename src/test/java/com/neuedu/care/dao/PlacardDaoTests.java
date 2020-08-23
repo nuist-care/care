@@ -1,4 +1,4 @@
-package com.neuedu.care.placard;
+package com.neuedu.care.dao;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
 
