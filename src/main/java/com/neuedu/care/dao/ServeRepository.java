@@ -20,9 +20,15 @@ import com.neuedu.care.entity.Serve;
 public interface ServeRepository extends JpaRepository<Serve, Integer>{
 	
 	/**
+	 * 新增服务信息
+	 */
+	@Modifying
+	@Transactional
+	@Query(nativeQuery = true, value = "INSERT INTO serve (eid,aid) VALUES (?1,?2)")
+	int insert(@Param("eid") Integer eid, @Param("aid") Integer aid);
+	
+	/**
 	 * 根据服务编号删除服务信息
-	 * @param serveid 服务编号
-	 * @return
 	 */
 	@Modifying
 	@Transactional
@@ -30,18 +36,26 @@ public interface ServeRepository extends JpaRepository<Serve, Integer>{
 	int deleteByPrimaryKey(@Param("serveid") Integer serveid);
 
 	/**
-	 * 根据员工编号查询服务信息
-	 * @param eid 员工编号
-	 * @return
+	 * 根据员工姓名和客户姓名进行多条件模糊查询
 	 */
-	@Query(nativeQuery = true, value = "select serve.serveid,employee.eid,employee.name,employee.telephone,client.aid,client.`name`,bed.floor,bed.room,bed.bnum FROM employee,client,bed,serve WHERE employee.eid = serve.eid AND client.aid = serve.aid AND bed.aid = client.aid AND serve.eid = ?1")
-	List<Serve> selectByPrimaryKey(@Param("eid") Integer eid);
+	@Transactional
+	@Query(nativeQuery = true, value = "select serve.serveid,employee.eid,employee.ename,employee.etelephone,employee.position,client.aid,client.aname,bed.floor,bed.room,bed.bnum FROM employee,client,bed,serve WHERE employee.eid = serve.eid AND client.aid = serve.aid AND bed.aid = client.aid AND employee.ename like concat ('%', ?1, '%') AND client.aname like concat ('%', ?2, '%')")
+	List<Serve> findByEnameContainingAndAnameContaining(@Param("ename") String ename, @Param("aname") String aname);
 	
 	/**
 	 * 查询所有服务信息
+	 */
+	@Transactional
+	@Query(nativeQuery = true, value = "select serve.serveid,employee.eid,employee.ename,employee.etelephone,employee.position,client.aid,client.aname,bed.floor,bed.room,bed.bnum FROM employee,client,bed,serve WHERE employee.eid = serve.eid AND client.aid = serve.aid AND bed.aid = client.aid")
+	List<Serve> findAll();
+	
+	/**
+	 * 根据服务编号查询服务信息
+	 * @param serveid
 	 * @return
 	 */
-	@Query(nativeQuery = true, value = "select serve.serveid,employee.eid,employee.name,employee.telephone,client.aid,client.`name`,bed.floor,bed.room,bed.bnum FROM employee,client,bed,serve WHERE employee.eid = serve.eid AND client.aid = serve.aid AND bed.aid = client.aid")
-	List<Serve> selectAll();
+	@Transactional
+	@Query(nativeQuery = true, value = "select serve.serveid,employee.eid,employee.ename,employee.etelephone,employee.position,client.aid,client.aname,bed.floor,bed.room,bed.bnum FROM employee,client,bed,serve WHERE employee.eid = serve.eid AND client.aid = serve.aid AND bed.aid = client.aid AND serve.serveid = ?1")
+	Serve findByServeid(Integer serveid);
 	
 }
