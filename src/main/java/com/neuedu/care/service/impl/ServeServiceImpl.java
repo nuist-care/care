@@ -24,12 +24,12 @@ public class ServeServiceImpl implements ServeService{
 	private ServeRepository serveRepository;
 
 	/**
-	 * 测试根据服务编号删除服务信息
+	 * 根据服务编号删除服务信息
 	 */
 	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public boolean delete(Integer serveid) {
-		// 业务逻辑验证：服务编号不能为null且不能小于1
+		// 业务判断：服务编号不能为null且不能小于1
 		if(null == serveid || serveid < 1) {
 			return false;
 		}
@@ -37,10 +37,13 @@ public class ServeServiceImpl implements ServeService{
 		return line == 1 ? true : false;
 	}
 
+	/**
+	 * 新增服务信息
+	 */
 	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public boolean insert(Serve serve) {
-		// 业务逻辑验证：服务对象不能为null
+		// 业务判断：服务对象不能为null
 		if (null == serve) {
 			return false;
 		}
@@ -48,24 +51,57 @@ public class ServeServiceImpl implements ServeService{
 		if (null == serve.getAid() || null == serve.getEid()) {
 			return false;
 		}
-		Serve line = serveRepository.save(serve);
-		return line != null ? true : false;
-	}
-
-	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
-	@Override
-	public List<Serve> selectByPrimaryKey(Integer eid) {
-		// 业务逻辑判断：员工编号不能为null且不能小于10001
-		if (null == eid || eid < 10001) {
-			return null;
+		// 不能重复添加
+		Serve s = serveRepository.findByServeid(serve.getServeid());
+		if (null != s) {
+			return false;
 		}
-		return serveRepository.selectByPrimaryKey(eid);
+		int line = serveRepository.insert(serve.getEid(), serve.getAid());
+		return line == 1 ? true : false;
 	}
 
+	/**
+	 *  查询所有服务信息
+	 */
 	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
 	@Override
 	public List<Serve> selectAll() {
-		return serveRepository.selectAll();
+		return serveRepository.findAll();
+	}
+
+	/**
+	 * 根据服务编号查询服务信息
+	 */
+	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Override
+	public Serve selectByPrimaryKey(Integer serveid) {
+		// 业务判断：服务编号不能为null且不能小于1
+		if (null == serveid || serveid < 1) {
+			return null;
+		}
+		return serveRepository.findByServeid(serveid);
+	}
+
+	/**
+	 * 根据员工姓名和客户姓名进行多条件模糊查询
+	 */
+	@Transactional(isolation = Isolation.READ_COMMITTED,propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
+	@Override
+	public List<Serve> findByEnameContainingAndAnameContaining(String ename, String aname) {
+		// 字符串去除空格
+		if (null != aname) {
+			aname = aname.trim();
+			if (aname.length() == 0) {
+				aname = "";
+			}
+		}
+		if (null != ename) {
+			ename = ename.trim();
+			if (ename.length() == 0) {
+				ename = "";
+			}
+		}
+		return serveRepository.findByEnameContainingAndAnameContaining(ename, aname);
 	}
 
 }

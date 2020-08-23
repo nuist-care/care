@@ -12,10 +12,10 @@ import com.neuedu.care.entity.Serve;
 public interface ServeService {
 	/**
 	 * 删除服务信息
-	 * @param eid 员工编号
+	 * @param serveid 服务编号
 	 * @return 是否成功删除
 	 */
-	boolean delete(Integer eid);
+	boolean delete(Integer serveid);
 	
 	/**
 	 * 新增服务信息
@@ -25,15 +25,23 @@ public interface ServeService {
 	boolean insert(Serve serve);
 	
 	/**
-	 * 根据员工编号查询服务信息
-	 * @param eid 员工编号
-	 * @return 部门信息对象集合
+	 * 根据服务编号查询服务信息
+	 * @param serveid 服务编号
+	 * @return 服务信息对象集合
 	 */
-	List<Serve> selectByPrimaryKey(Integer eid); 
+	Serve selectByPrimaryKey(Integer serveid); 
 	
 	/**
 	 * 查询所有服务信息
 	 * @return 服务信息对象集合
 	 */
 	List<Serve> selectAll();
+	
+	/**
+	 * 根据员工姓名和客户姓名进行多条件模糊查询
+	 * @param ename 员工姓名
+	 * @param aname 客户姓名
+	 * @return 服务信息对象集合
+	 */
+	List<Serve> findByEnameContainingAndAnameContaining(String ename, String aname);
 }
