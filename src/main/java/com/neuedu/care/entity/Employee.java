@@ -8,9 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-
-import org.hibernate.validator.constraints.Length;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,8 +30,6 @@ public class Employee implements Serializable{
 	/**
 	 * 编号
 	 */
-	@NotBlank(message = "登录账号不能为空")
-	@Length(min = 5,max = 5,message = "账号长度错误")
 	private Integer eid;
 	
 	/**
@@ -85,8 +80,6 @@ public class Employee implements Serializable{
 	/**
 	 * 密码
 	 */
-	@NotBlank(message = "登录密码不能为空")
-	@Length(min = 6,message = "登录密码不能少于六位")
 	private String password;
 	/**
 	 * 
