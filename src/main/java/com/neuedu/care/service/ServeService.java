@@ -27,7 +27,7 @@ public interface ServeService {
 	/**
 	 * 根据服务编号查询服务信息
 	 * @param serveid 服务编号
-	 * @return 服务信息对象集合
+	 * @return 服务信息对象
 	 */
 	Serve selectByPrimaryKey(Integer serveid); 
 	

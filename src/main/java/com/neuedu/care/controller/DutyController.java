@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
-import com.neuedu.care.config.Audience;
 import com.neuedu.care.entity.Duty;
 import com.neuedu.care.service.DutyService;
 
@@ -36,9 +35,6 @@ import io.swagger.annotations.ApiResponse;
 public class DutyController {
 	@Autowired
 	private DutyService dutyService;
-	
-	@Autowired
-	private Audience audience;
 	
 	/**
 	 * 显示所有值班信息页面

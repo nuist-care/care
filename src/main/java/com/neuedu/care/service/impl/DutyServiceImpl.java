@@ -2,14 +2,11 @@ package com.neuedu.care.service.impl;
 
 import java.util.List;
 
-import javax.persistence.Id;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.neuedu.care.dao.DutyRepository;
 import com.neuedu.care.entity.Duty;
-import com.neuedu.care.entity.Serve;
 import com.neuedu.care.service.DutyService;
 
 /**

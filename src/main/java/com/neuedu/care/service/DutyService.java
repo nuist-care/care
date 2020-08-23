@@ -51,7 +51,7 @@ public interface DutyService {
 	/**
 	 * 根据值班编号查询值班信息
 	 * @param did 值班编号
-	 * @return 值班信息对象集合
+	 * @return 值班信息对象
 	 */
 	Duty findByDid(Integer did);
 }

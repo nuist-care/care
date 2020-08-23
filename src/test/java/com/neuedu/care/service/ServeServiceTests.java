@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.neuedu.care.entity.Serve;
-import com.neuedu.care.service.ServeService;
 
 import lombok.extern.slf4j.Slf4j;
 

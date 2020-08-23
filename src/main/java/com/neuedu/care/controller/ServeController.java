@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
-import com.neuedu.care.config.Audience;
-import com.neuedu.care.entity.Duty;
 import com.neuedu.care.entity.Serve;
 import com.neuedu.care.service.ServeService;
 
@@ -31,9 +29,6 @@ import io.swagger.annotations.ApiOperation;
 public class ServeController {
 	@Autowired
 	private ServeService serveService;
-	
-	@Autowired
-	private Audience audience;
 
 	/**
 	 * 显示所有服务信息页面
