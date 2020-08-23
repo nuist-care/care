@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.neuedu.care.entity.Serve;
 import com.neuedu.care.entity.Visiting;
 
 
@@ -42,4 +43,10 @@ public interface VistingRepository extends JpaRepository<Visiting, Integer>{
 	@Query(nativeQuery = true,value = "update visiting v ,client c set v.aid = ?2,c.aname = ?3,v.vhospital = ?4,v.vtime = ?5,v.vroom = ?6,v.vresult = ?7  where v.aid=c.aid and vid = ?1")
 	int updateVisiting(@Param("vid")Integer vid,@Param("aid")Integer aid,@Param("aname")String aname,@Param("vhospital")String vhospital,
 			@Param("vtime")Date vtime,@Param("vroom")String vroom,@Param("vresult")String vresult);
+	/**
+	 * 根据编号查询
+	 */
+	@Transactional
+	@Query(nativeQuery = true, value = "select v.vid,v.aid,c.aname,v.vhospital,v.vtime,v.vroom,v.vresult FROM visiting v,client c WHERE v.aid = c.aid  AND v.vid = ?1")
+	Visiting findByVid(Integer vid);
 }

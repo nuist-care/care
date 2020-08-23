@@ -8,13 +8,15 @@ import com.sun.org.apache.xalan.internal.xsltc.util.IntegerArray;
 
 
 public interface VisitingService {
-	int addVisiting(Integer aid,String aname,String vhospital,Date vtime,String vroom,String vresult);
+	boolean addVisiting(Integer aid,String vhospital,Date vtime,String vroom,String vresult);
 	
-	int updateVisiting(Integer vid,Integer aid,String aname,String vhospital,Date vtime,String vroom,String vresult);
+	boolean updateVisiting(Integer vid,Integer aid,String aname,String vhospital,Date vtime,String vroom,String vresult);
 	
 	List<Visiting> findAllVisiting();
 	
 	
 	List<Visiting> findByVidAidAname(Integer vid,Integer aid,String aname);
+	
+	Visiting findByVid(Integer vid);
 
 }

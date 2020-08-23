@@ -33,19 +33,20 @@ public class VisitingServiceImpl implements VisitingService{
 	}
 
 	@Override
-	public int updateVisiting(Integer vid, Integer aid, String aname, String vhospital, Date vtime, String vroom,
+	public boolean updateVisiting(Integer vid, Integer aid, String aname, String vhospital, Date vtime, String vroom,
 			String vresult) {
-		// TODO Auto-generated method stub
 		int line=vistingRepository.updateVisiting(vid, aid, aname, vhospital, vtime, vroom, vresult);
-		return line;
+		return line==1?true:false;
 	}
 
 
 
 	@Override
-	public int addVisiting(Integer aid, String aname, String vhospital, Date vtime, String vroom, String vresult) {
-		int line=addVisiting(aid, aname, vhospital, vtime, vroom, vresult);
-		return line;
+	public boolean addVisiting(Integer aid, String vhospital, Date vtime, String vroom, String vresult) {
+		int line=vistingRepository.addVisiting(aid, vhospital, vtime, vroom, vresult);
+		return line==1?true:false;
+		
+		
 	}
 
 
@@ -53,6 +54,14 @@ public class VisitingServiceImpl implements VisitingService{
 	@Override
 	public List<Visiting> findAllVisiting() {
 		return vistingRepository.findAllVisiting();
+	}
+
+	@Override
+	public Visiting findByVid(Integer vid) {
+		if (null == vid || vid < 1) {
+			return null;
+		}
+		return vistingRepository.findByVid(vid);
 	}
 	 
 

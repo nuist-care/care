@@ -4,6 +4,7 @@ package com.neuedu.care.dao;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,26 +52,24 @@ public class CareJPADAOTests {
 //		log.debug("测试通过");
 //		
 //	}
-	
+//	
 	/**
 	 * vistingRepository测试
 	 *  添加
 	 * 
 	 *  */
 //	@Test
-//	public void test_save() throws ParseException {
+//	public void test_addVisiting() throws ParseException {
 //	    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-//	    Visiting visiting=Visiting.builder()
-//	    		.aid(10002)
-//	    		.aname("hjx")
-//	    		.vhospital("人民医院")
-//	    		.vtime(sdf.parse("2020-08-08"))
-//	    		.vroom("207")
-//	    		.vresult("发烧")
-//	    		.build();
-//	    Visiting d=vistingRepository.save(visiting);
-//		log.info(d.toString());
-//		log.debug("测试通过");
+//		System.out.println("测试开始，新增信息：");
+//		Integer aid = new Integer(10001);
+//		String vhospital="人民医院";
+//		Date vtime=sdf.parse("2020-08-23");
+//		String vroom="207";
+//		String vresult="发烧";
+//		int v=vistingRepository.addVisiting(aid, vhospital, vtime, vroom, vresult);
+//		Assertions.assertNotEquals(0, v);
+//		log.debug("测试通过！");
 //	}
 //	
 	/**
@@ -84,6 +83,34 @@ public class CareJPADAOTests {
 //        Assertions.assertNotEquals(0, visitings.size());
 //		System.out.println(visitings);
 //		log.debug("测试通过");
+//	}
+	/**
+	 * 修改
+	 */
+//	@Test
+//	public void test_updateVisiting() throws ParseException {
+//	    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//		System.out.println("测试开始，新增修改信息：");
+//		Integer vid = new Integer(10001);
+//		Integer aid = new Integer(10002);
+//		String aname="yj";
+//		String vhospital="人民医院";
+//		Date vtime=sdf.parse("2020-08-23");
+//		String vroom="207";
+//		String vresult="发烧";
+//		int v=vistingRepository.updateVisiting(vid, aid, aname, vhospital, vtime, vroom, vresult);
+//		Assertions.assertNotEquals(0, v);
+//		log.debug("测试通过！");
+//	}
+	//根据就诊编号查询
+//		@Test
+//	public void test_findByVid() {
+//		System.out.println("根据就诊编号查询就诊信息：");
+//		Integer vid = new Integer(10001);
+//		Visiting visiting = vistingRepository.findByVid(vid);
+//		Assertions.assertNotEquals(null, visiting);
+//		System.out.println(visiting);
+//		log.debug("测试通过！");
 //	}
 
 }

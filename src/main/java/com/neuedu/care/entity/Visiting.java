@@ -1,5 +1,6 @@
 package com.neuedu.care.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -29,7 +30,12 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Visiting {
+public class Visiting implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3166098100788128426L;
+
 	/**
 	 * 就诊编号
 	 */
@@ -44,6 +50,7 @@ public class Visiting {
 	 */
 //	@NotBlank
 	@Column(name="aid",table = "visiting")	
+	@Range(min = 10000,message = "老人编号长度错误！")
 	private Integer aid;
 	
 	/**
@@ -63,7 +70,7 @@ public class Visiting {
 	
 	/** 
 	 * 就诊时间 */
-//	@NotBlank
+	//@NotBlank
 	@Column(name="vtime",table = "visiting")
 	private Date vtime;
 	
