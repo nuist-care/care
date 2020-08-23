@@ -37,7 +37,6 @@ public class SwaggerConfig {
 	}
 	
 	private ApiInfo createApiInfo() {
-		System.out.println(enable+title);
 		return new ApiInfoBuilder()
 				.title(this.title)
 				.description("SpringBoot项目使用swagger构建Restfull")
