@@ -20,6 +20,14 @@ import com.neuedu.care.entity.Employee;
  */
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
+	
+	/**
+	 * 根据编号查询一个员工信息
+	 * @param eid
+	 * @return
+	 */
+	Employee findByEid(Integer eid);
+	
 	/**
 	 * 根据eid，password查询员工
 	 * @param eid
@@ -35,14 +43,29 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	 * @param position
 	 * @return
 	 */
+
 	@Transactional
 	@Modifying
-	List<Employee> findByEidOrNameContainingOrPosition(@Param("eid")Integer eid,@Param("name")String name,@Param("position")String position);
+	List<Employee> findByEidOrEnameContainingOrPosition(@Param("eid")Integer eid,@Param("ename")String ename,@Param("position")String position);
 	
+	/**
+	 * 更新员工信息
+	 * @param eid
+	 * @param ename
+	 * @param esex
+	 * @param eage
+	 * @param eIDnumber
+	 * @param etelephone
+	 * @param eaddress
+	 * @param worktime
+	 * @param workage
+	 * @param position
+	 * @return
+	 */
 	@Transactional
 	@Modifying
-	@Query(nativeQuery = true,value = "update employee set name = ?2,sex = ?3,age = ?4,IDnumber = ?5,telephone = ?6,address = ?7,worktime = ?8,workage = ?9,position =  ?10 where eid = ?1")
-	int update(@Param("eid")Integer eid,@Param("name")String name,@Param("sex")String sex,@Param("age")Integer age,
-			@Param("IDnumber")String IDnumber,@Param("telephone")String telephone,@Param("address")String address,@Param("worktime")Date worktime,
+	@Query(nativeQuery = true,value = "update employee set ename = ?2,esex = ?3,eage = ?4,eIDnumber = ?5,etelephone = ?6,eaddress = ?7,worktime = ?8,workage = ?9,position =  ?10 where eid = ?1")
+	int update(@Param("eid")Integer eid,@Param("ename")String ename,@Param("esex")String esex,@Param("eage")Integer eage,
+			@Param("eIDnumber")String eIDnumber,@Param("etelephone")String etelephone,@Param("eaddress")String eaddress,@Param("worktime")Date worktime,
 			@Param(" workage")Integer workage,@Param("position")String position);
 }

@@ -35,32 +35,32 @@ public class Employee implements Serializable{
 	/**
 	 * 姓名
 	 */
-	private String name;
+	private String ename;
 	
 	/**
 	 * 性别
 	 */
-	private String sex;
+	private String esex;
 	
 	/**
 	 * 年龄
 	 */
-	private Integer age;
+	private Integer eage;
 	
 	/**
 	 * 身份证号码
 	 */
-	private String IDnumber;
+	private String eIDnumber;
 	
 	/**
 	 * 电话号码
 	 */
-	private String telephone;
+	private String etelephone;
 	
 	/**
 	 * 地址
 	 */
-	private String address;
+	private String eaddress;
 	
 	/**
 	 * 入职时间
