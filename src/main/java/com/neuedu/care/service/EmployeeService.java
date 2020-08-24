@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
@@ -17,6 +19,8 @@ import com.neuedu.care.entity.Employee;
  *
  */
 public interface EmployeeService {
+	
+	Page<Employee> findAll(Pageable pageable);
 	/**
 	 * 根据姓名，密码查询是否员工
 	 * @param eid 员工编号
@@ -26,6 +30,7 @@ public interface EmployeeService {
 	Employee login(Integer eid,String epassword);
 	/**
 	 * 查询所有员工
+	 * @param pageable 
 	 * @return
 	 */
 	List<Employee> findAll();

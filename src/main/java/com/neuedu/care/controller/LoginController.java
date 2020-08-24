@@ -10,11 +10,15 @@ import com.neuedu.care.config.Audience;
 import com.neuedu.care.entity.Employee;
 import com.neuedu.care.service.EmployeeService;
 import com.neuedu.care.util.JWTTokenUtil;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 /**
  * 登录控制类LoginController
  * @author 姚季
  *
  */
+@Api(tags = "登录控制器")
 @Controller
 public class LoginController {
 	@Autowired
@@ -27,6 +31,7 @@ public class LoginController {
 	 * @param password
 	 * @return
 	 */
+	@ApiOperation(value = "登录")
 	@PostMapping(value = "checklogin")
 	@ResponseBody
 	public ResultBean checklogin(Integer eid,String password) {
