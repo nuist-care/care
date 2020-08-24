@@ -5,7 +5,7 @@ import java.util.List;
 import com.neuedu.care.entity.Medicinerecord;
 
 /**
- * 业务逻辑层接口MedicinerecordService
+ * 用药记录管理业务逻辑层接口MedicinerecordService
  * @author 马梦瑶
  *
  */

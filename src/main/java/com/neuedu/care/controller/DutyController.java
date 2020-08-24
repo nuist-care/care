@@ -63,7 +63,7 @@ public class DutyController {
 	@GetMapping(value = "/find")
 	public ResultBean find(String dtime, String dnurse) {
 		List<Duty> duties = dutyService.findByCondition(dtime, dnurse);
-		ResultBean r = new ResultBean(200, true, "根据值班时间和值班人员进行多条件模糊查询成功！", duties);
+		ResultBean r = new ResultBean(200, true, "查询成功！", duties);
 		System.out.println(r);
 		return r;
 	}

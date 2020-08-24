@@ -13,7 +13,7 @@ import com.neuedu.care.entity.Serve;
 import com.neuedu.care.service.ServeService;
 
 /**
- * 业务逻辑层接口ServeService实现类ServeServiceImpl
+ * 设置服务对象管理业务逻辑层接口ServeService实现类ServeServiceImpl
  * @author 马梦瑶
  *
  */

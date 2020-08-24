@@ -10,7 +10,7 @@ import com.neuedu.care.entity.Duty;
 import com.neuedu.care.service.DutyService;
 
 /**
- * 业务逻辑接口DutyService实现类DutyServiceImpl
+ * 值班信息管理业务逻辑接口DutyService实现类DutyServiceImpl
  * 
  * @author 马梦瑶
  *

@@ -13,7 +13,7 @@ import com.neuedu.care.entity.Medicinerecord;
 import com.neuedu.care.service.MedicinerecordService;
 
 /**
- * 业务逻辑层接口MedicinerecordService实现类MedicinerecordServiceImpl
+ * 用药管理业务逻辑层接口MedicinerecordService实现类MedicinerecordServiceImpl
  * 
  * @author 马梦瑶
  *

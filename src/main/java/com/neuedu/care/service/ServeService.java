@@ -5,7 +5,7 @@ import java.util.List;
 import com.neuedu.care.entity.Serve;
 
 /**
- * 业务逻辑层接口ServeService
+ *设置服务对象管理业务逻辑层接口ServeService
  * @author 马梦瑶
  *
  */

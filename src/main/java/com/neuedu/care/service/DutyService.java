@@ -5,7 +5,7 @@ import java.util.List;
 import com.neuedu.care.entity.Duty;
 
 /**
- * 业务逻辑层接口DutyService
+ * 值班信息管理业务逻辑层接口DutyService
  * @author 马梦瑶
  *
  */

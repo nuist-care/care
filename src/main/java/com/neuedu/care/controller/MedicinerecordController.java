@@ -3,18 +3,13 @@ package com.neuedu.care.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
-import com.neuedu.care.entity.Duty;
 import com.neuedu.care.entity.Medicinerecord;
 import com.neuedu.care.service.MedicinerecordService;
 
@@ -77,7 +72,7 @@ public class MedicinerecordController {
 	@ApiImplicitParam(paramType = "path", name = "mrid", value = "用药记录编号", required = true, dataType = "int")
 	@ApiResponse(code = 200, message = "弹出模态框，数据存储在care中")
 	@GetMapping(value = "/{mrid}")
-	public ResultBean 修改实际用药时间(@PathVariable("mrid") Integer mrid) {
+	public ResultBean detail(@PathVariable("mrid") Integer mrid) {
 		Medicinerecord medicinerecord = medicinerecordService.findByMrid(mrid);
 		ResultBean r = new ResultBean(200, true, "查询成功！", medicinerecord);
 		return r;
@@ -85,29 +80,26 @@ public class MedicinerecordController {
 	
 	/**
 	 * 修改实际用药时间
-	 * @param did 值班编号
-	 * @param duty 值班信息对象
-	 * @param bindingResult 参数校验结果
+	 * @param mrid 用药记录编号
+	 * @param actualtime 实际用药时间
 	 * @return 返回JSON数据
 	 */
 	@ApiOperation(value = "修改实际用药时间")
-	@PutMapping(value = "/update/{mrid}")
-	public ResultBean update(@PathVariable("mrid") Integer mrid, @PathVariable("actualtime") String actualtime, BindingResult bindingResult) {
+	@PutMapping(value = "/update/{mrid}/{actualtime}")
+	public ResultBean update(@PathVariable("mrid") Integer mrid, @PathVariable("actualtime") String actualtime) {
 		ResultBean r = null;
-		if (bindingResult.hasErrors()) {
-			// 将无法通过数据校验的信息，合并成一个字符串，返回给前端
-			StringBuffer msg = new StringBuffer();
-			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
-			}
-			r = new ResultBean(5006, false, msg.toString(), null);
+		if (null == mrid) {
+			r = new ResultBean(5006, false, "用药记录编号不能为空！", null);
 			return r;
-		}
+		}else if (org.apache.commons.lang3.StringUtils.isBlank(actualtime)) {
+			r = new ResultBean(5006, false, "实际用药时间不能为空！", null);
+			return r;
+		} 
 		boolean flag = medicinerecordService.update(mrid, actualtime);
 		if (flag) {
-			r = new ResultBean(200, true, "修改值班信息成功！", null);
+			r = new ResultBean(200, true, "记录成功！", null);
 		} else {
-			r = new ResultBean(5005, false, "修改值班信息失败！", null);
+			r = new ResultBean(5005, false, "记录失败！", null);
 		}
 		return r;
 	}
