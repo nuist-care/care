@@ -12,5 +12,10 @@ import com.neuedu.care.entity.Client;
  */
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer>{
-	
+	/**
+	 * 根据编号查询一个客户
+	 * @param aid
+	 * @return
+	 */
+	Client findByAid(Integer aid);
 }

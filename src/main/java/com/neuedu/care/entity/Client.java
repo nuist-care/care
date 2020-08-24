@@ -59,16 +59,6 @@ public class Client implements Serializable{
 	private String genetichistory;
 	
 	/**
-	 * 客户主治医师
-	 */
-	private String doctor;
-	
-	/**
-	 * 客户护工
-	 */
-	private String worker;
-	
-	/**
 	 * 客户身体状况
 	 */
 	private String conditiondescription;
