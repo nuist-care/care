@@ -26,15 +26,10 @@ public class DutyDAOTests {
 	 * 新增值班信息
 	 */
 	@Test
-	public void test_save() {
+	public void test_insert() {
 		System.out.println("测试开始，新增值班信息：");
-		Duty duty = Duty.builder()
-				.dtime("周日上午")
-				.dnurse("小红")
-				.build();
-		Duty d = dutyRepository.save(duty);
-		Assertions.assertNotEquals(0, d.getDid().intValue());
-		log.info(d.toString());
+		int d = dutyRepository.insert("周一",10005);
+		Assertions.assertNotEquals(0, d);
 		log.debug("测试通过！");
 	}
 	
@@ -56,20 +51,20 @@ public class DutyDAOTests {
 	@Test
 	public void test_updateDuty() {
 		System.out.println("测试开始，根据值班编号修改值班信息：");
-		Integer did = new Integer(2);
-		String dtime = new String("周日下午");
-		String dnurse = new String("小红");
-		int d = dutyRepository.updateDuty(did, dtime, dnurse);
+		Integer did = new Integer(8);
+		String dtime = new String("周日");
+		Integer eid = new Integer(10005);
+		int d = dutyRepository.updateDuty(did, dtime, eid);
 		Assertions.assertNotEquals(0, d);
 		log.debug("测试通过！");
 	}
 	
 	/**
-	 * 根据值班时间和值班人员进行多条件模糊查询
+	 * 根据值班时间和员工姓名进行多条件模糊查询
 	 */
 	@Test
 	public void test_findByDtimeContainingAndDnurseContaining() {
-		System.out.println("测试开始，根据值班时间和值班人员进行多条件模糊查询：");
+		System.out.println("测试开始，根据值班时间和员工姓名进行多条件模糊查询：");
 		List<Duty> duties = dutyRepository.findByDtimeContainingAndDnurseContaining("周日","");
 		Assertions.assertNotEquals(0, duties.size());
 		System.out.println(duties);
@@ -94,9 +89,22 @@ public class DutyDAOTests {
 	@Test
 	public void test_findByDid() {
 		System.out.println("测试开始，根据值班编号查询值班信息：");
-		Duty duty = dutyRepository.findByDid(7);
+		Duty duty = dutyRepository.findByDid(8);
 		Assertions.assertNotEquals(null, duty);
 		System.out.println(duty);
 		log.debug("测试通过！"); 
 	}
+	
+	/**
+	 * 根据值班时间和员工编号查询值班信息
+	 */
+	@Test
+	public void test_findByDtimeAndEid() {
+		System.out.println("测试开始，根据值班时间和员工编号查询值班信息：");
+		Duty duty = dutyRepository.findByDtimeAndEid("周日", 10005);
+		Assertions.assertNotEquals(null, duty);
+		System.out.println(duty);
+		log.debug("测试通过！");
+	}
+	
 }

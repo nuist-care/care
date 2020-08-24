@@ -20,6 +20,14 @@ import com.neuedu.care.entity.Duty;
 public interface DutyRepository extends JpaRepository<Duty, Integer>{
 	
 	/**
+	 * 新增值班信息
+	 */
+	@Modifying
+	@Transactional
+	@Query(nativeQuery = true, value = "insert into duty(dtime,eid) value (?1,?2)")
+	int insert(@Param("dtime") String dtime, @Param("eid") Integer eid);
+	
+	/**
 	 * 根据值班编号删除值班信息
 	 */
 	@Modifying
@@ -32,24 +40,31 @@ public interface DutyRepository extends JpaRepository<Duty, Integer>{
 	 */
 	@Modifying
 	@Transactional
-	@Query(nativeQuery = true, value = "update duty set dtime = ?2, dnurse = ?3 where did = ?1")
-	int updateDuty(@Param("did") Integer did, @Param("dtime") String dtime, @Param("dnurse") String dnurse);
+	@Query(nativeQuery = true, value = "update duty set dtime = ?2, eid = ?3 where did = ?1")
+	int updateDuty(@Param("did") Integer did, @Param("dtime") String dtime, @Param("eid") Integer eid);
 	
 	/**
-	 * 根据值班时间和值班人员进行多条件模糊查询
+	 * 根据值班时间和员工姓名进行多条件模糊查询
 	 */
-	@Transactional
-	List<Duty> findByDtimeContainingAndDnurseContaining(@Param("dtime")String dtime, @Param("dnurse")String dnurse);
+	@Query(nativeQuery = true,value = "SELECT duty.did,duty.dtime,duty.eid,employee.ename,employee.position FROM duty,employee WHERE duty.eid = employee.eid AND (duty.dtime like concat ('%', ?1, '%') OR employee.ename like concat ('%', ?2, '%'))")
+	List<Duty> findByDtimeContainingAndDnurseContaining(@Param("dtime")String dtime, @Param("ename")String ename);
 	
 	/**
 	 * 查询所有值班信息
 	 */
-	@Transactional
+	@Query(nativeQuery = true,value = "SELECT duty.did,duty.dtime,duty.eid,employee.ename,employee.position FROM duty,employee WHERE duty.eid = employee.eid")
 	List<Duty> findAll();
 
 	/**
 	 * 根据值班编号查询值班信息
 	 */
-	@Transactional
+	@Query(nativeQuery = true,value = "SELECT duty.did,duty.dtime,duty.eid,employee.ename,employee.position FROM duty,employee WHERE duty.eid = employee.eid AND duty.did = ?1")
 	Duty findByDid(Integer did);
+	
+	/**
+	 * 根据值班时间和员工编号查询值班信息
+	 */
+	@Query(nativeQuery = true,value = "SELECT duty.did,duty.dtime,duty.eid,employee.ename,employee.position FROM duty,employee WHERE duty.eid = employee.eid AND duty.dtime = ?1 AND duty.eid = ?2")
+	Duty findByDtimeAndEid(@Param("dtime") String dtime,@Param("eid") Integer eid);
+	
 }
