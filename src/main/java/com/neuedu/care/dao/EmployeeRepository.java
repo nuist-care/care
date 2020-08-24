@@ -33,6 +33,13 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	Employee findByEid(Integer eid);
 	
 	/**
+	 * 根据员工姓名查询一个员工信息
+	 * @param ename
+	 * @return
+	 */
+	Employee findByEname(String ename);
+	
+	/**
 	 * 根据eid，password查询员工
 	 * @param eid
 	 * @param password

@@ -20,19 +20,20 @@ public interface DutyService {
 	
 	/**
 	 * 新增值班信息
-	 * @param duty 值班信息对象
+	 * @param dtime 值班时间
+	 * @param ename 员工姓名
 	 * @return 是否成功新增
 	 */
-	boolean insert(Duty duty);
+	boolean insert(String dtime,String ename);
 	
 	/**
 	 * 更新值班信息
 	 * @param did 值班编号
 	 * @param dtime 值班时间
-	 * @param dnurse 值班人员
+	 * @param ename 员工姓名
 	 * @return 是否成功更新
 	 */
-	boolean update(Integer did, String dtime, String dnurse);
+	boolean update(Integer did, String dtime, String ename);
 	
 	/**
 	 * 查询所有值班信息
@@ -41,12 +42,12 @@ public interface DutyService {
 	List<Duty> selectAll();
 
 	/**
-	 * 根据值班时间和值班人员进行多条件模糊查询
+	 * 根据值班时间和员工姓名进行多条件模糊查询
 	 * @param dtime 值班时间
-	 * @param dnurse 值班人员
+	 * @param ename 员工姓名
 	 * @return 值班信息对象集合
 	 */
-	List<Duty> findByCondition(String dtime, String dnurse);
+	List<Duty> findByCondition(String dtime, String ename);
 	
 	/**
 	 * 根据值班编号查询值班信息

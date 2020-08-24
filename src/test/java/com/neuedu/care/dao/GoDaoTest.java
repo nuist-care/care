@@ -23,18 +23,46 @@ class GoDaoTest {
 	@Autowired
 	private GoRepository goRepository;
 
+//	/**
+//	 * 
+//	 */
+//	@Test
+//	void test_findBygidaid() {
+//		Integer gid = null;
+//		Integer aid = null;
+//		String approver = "姚";
+//		List<Go> gos = goRepository.findByGidOrAidOrApproverlike(gid, aid, approver);
+//		for (Go go : gos) {
+//			log.info(go.toString());	
+//		}
+//	}
+	
+//	/**
+//	 * 
+//	 */
+//	@Test
+//	void test_findInfo() {
+//		List<Go> gos = goRepository.findInfo();
+//		for (Go go : gos) {
+//			log.info(go.toString());	
+//		}
+//	}
+
+	/**
+	 * 
+	 */
+//	@Test
+//	void test_findByAid() {
+//		Go go = goRepository.findByGid(100000);
+//			log.info(go.toString());	
+//	}
+	
 	/**
 	 * 
 	 */
 	@Test
-	void test_findBygidaid() {
-		Integer gid = null;
-		Integer aid = null;
-		String approver = "姚";
-		List<Go> gos = goRepository.findByGidOrAidOrApproverContaining(gid, aid, approver);
-		for (Go go : gos) {
-			log.info(go.toString());	
-		}
+	void test_delete() {
+		int line = goRepository.deleteByGid(100001);
+		log.info("删除成功"+line);	
 	}
-
 }

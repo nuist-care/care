@@ -2,11 +2,14 @@ package com.neuedu.care.service.impl;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.neuedu.care.dao.DutyRepository;
+import com.neuedu.care.dao.EmployeeRepository;
 import com.neuedu.care.entity.Duty;
+import com.neuedu.care.entity.Employee;
 import com.neuedu.care.service.DutyService;
 
 /**
@@ -20,6 +23,9 @@ public class DutyServiceImpl implements DutyService {
 
 	@Autowired
 	private DutyRepository dutyRepository;
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
 
 	/**
 	 * 根据值班编号删除值班信息
@@ -38,37 +44,70 @@ public class DutyServiceImpl implements DutyService {
 	 * 新增值班信息
 	 */
 	@Override
-	public boolean insert(Duty duty) {
-		// 业务判断：值班对象不能为null
-		if (null == duty) {
+	public boolean insert(String dtime, String ename) {
+		// 非空属性判断
+		if (StringUtils.isBlank(dtime)
+				|| StringUtils.isBlank(ename)) {
 			return false;
 		}
-		// 非空属性判断
-		if (org.apache.commons.lang3.StringUtils.isBlank(duty.getDtime())
-				|| org.apache.commons.lang3.StringUtils.isBlank(duty.getDnurse())) {
+		// 员工姓名必须存在于员工表中
+		Employee employee = employeeRepository.findByEname(ename);
+		System.out.println(employee);
+		if (null == employee) {
+			return false;
+		}
+		// 值班时间必须是周一、周二、周三、周四、周五、周六、周日
+		if (dtime.trim() != "周一" && dtime.trim() != "周二" && dtime.trim() != "周三" && dtime.trim() != "周四"
+				&& dtime.trim() != "周五" && dtime.trim() != "周六" && dtime.trim() != "周日") {
 			return false;
 		}
 		// 不能重复添加
-				Duty d = dutyRepository.findByDid(duty.getDid());
-				if (null != d) {
-					return false;
-				}
-		Duty line = dutyRepository.save(duty);
-		return line.getDid().intValue() != 0 ? true : false;
+		Duty d = dutyRepository.findByDtimeAndEid(dtime, employee.getEid());
+		if (null != d) {
+			return false;
+		}
+		// 员工职位必须是护士
+		System.out.println("employee.getPosition = " + employee.getPosition().toString());
+		boolean flag = (employee.getPosition().toString().equals("护士"));
+		System.out.println("flag= " + flag);
+		if (employee.getPosition().equals("护士")) {
+			return false;
+		}
+		System.out.println("出if了" + employee.getPosition());
+		int line = dutyRepository.insert(dtime, employee.getEid());
+		return line == 1 ? true : false;
 	}
 
 	/**
 	 * 更新值班信息
 	 */
 	@Override
-	public boolean update(Integer did, String dtime, String dnurse) {
-		// 业务判断：非空属性判断
-		if (null == did
-				|| org.apache.commons.lang3.StringUtils.isBlank(dtime)
-				|| org.apache.commons.lang3.StringUtils.isBlank(dnurse)) {
+	public boolean update(Integer did, String dtime, String ename) {
+		// 非空属性判断
+		if (null == did || org.apache.commons.lang3.StringUtils.isBlank(dtime)
+				|| org.apache.commons.lang3.StringUtils.isBlank(ename)) {
 			return false;
 		}
-		int line = dutyRepository.updateDuty(did, dtime, dnurse);
+		// 员工姓名必须存在于员工表中
+		Employee employee = employeeRepository.findByEname(ename);
+		if (null == employee) {
+			return false;
+		}
+		// 值班时间必须是周一、周二、周三、周四、周五、周六、周日
+		if (dtime.trim() != "周一" && dtime.trim() != "周二" && dtime.trim() != "周三" && dtime.trim() != "周四"
+				&& dtime.trim() != "周五" && dtime.trim() != "周六" && dtime.trim() != "周日") {
+			return false;
+		}
+		// 不能重复添加
+		Duty d = dutyRepository.findByDtimeAndEid(dtime, employee.getEid());
+		if (null != d) {
+			return false;
+		}
+		// 员工职位必须是护士
+		if (employee.getPosition().trim() != "护士") {
+			return false;
+		}
+		int line = dutyRepository.updateDuty(did, dtime, employee.getEid());
 		return line == 1 ? true : false;
 	}
 
@@ -78,13 +117,13 @@ public class DutyServiceImpl implements DutyService {
 	@Override
 	public List<Duty> findByCondition(String dtime, String dnurse) {
 		// 字符串主动去除空格
-		if(null != dnurse) {
+		if (null != dnurse) {
 			dnurse = dnurse.trim();
 			if (dnurse.length() == 0) {
 				dnurse = "";
 			}
 		}
-		if(null != dtime) {
+		if (null != dtime) {
 			dtime = dtime.trim();
 			if (dtime.length() == 0) {
 				dtime = "";

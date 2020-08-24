@@ -39,6 +39,17 @@ class EmployeeDaoTest {
 //	}
 	
 	/**
+	 * 测试findByEname（）函数
+	 * 查询是否有这个员工
+	 */
+//	@Test
+//	void test_findByEname() {
+//		String ename = new String("张三");
+//		Employee employee = employeeRepository.findByEname(ename);
+//		System.out.println(employee);
+//	}
+	
+	/**
 	 * 测试finaAll()函数
 	 */
 //	@Test
@@ -52,16 +63,16 @@ class EmployeeDaoTest {
 	/**
 	 * 测试多条件查询
 	 */
-	@Test
-	void test_findByEidOrNameLikeOrPositionn() {
-		Integer eid = new Integer("10001");
-		String ename = "mm";
-		String position = "医生";
-		List<Employee> employees = employeeRepository.findByEidOrEnameContainingOrPosition(null,"y","");
-		for (Employee employee : employees) {
-			log.info(employee.toString());
-		}
-	}
+//	@Test
+//	void test_findByEidOrNameLikeOrPositionn() {
+//		Integer eid = new Integer("10001");
+//		String ename = "mm";
+//		String position = "医生";
+//		List<Employee> employees = employeeRepository.findByEidOrEnameContainingOrPosition(null,"y","");
+//		for (Employee employee : employees) {
+//			log.info(employee.toString());
+//		}
+//	}
 	/**
 	 * 测试新增功能
 	 * @throws ParseException 
@@ -122,4 +133,9 @@ class EmployeeDaoTest {
 //		log.info(line+"更新成功");
 //	}
 	
+	@Test
+	void test_findByename(){
+		Employee employee = employeeRepository.findByEname("zq");
+		log.info(employee.toString());
+	}
 }
