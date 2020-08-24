@@ -1,4 +1,4 @@
-package com.neuedu.care.placard;
+package com.neuedu.care.controller;
 
 import java.nio.charset.StandardCharsets;
 
@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ExtendWith(SpringExtension.class)
-class PlacardControllerDemoTests {
+class PlacardControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
 	
