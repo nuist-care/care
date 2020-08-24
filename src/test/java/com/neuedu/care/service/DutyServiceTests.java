@@ -35,16 +35,16 @@ public class DutyServiceTests {
 //		log.debug("测试通过！");
 //	}
 	
-//	/**
-//	 * 新增值班信息
-//	 */
-//	@Test
-//	void test_insert() {
-//		System.out.println("测试开始，新增值班信息：");
-//		boolean d = dutyService.insert("周一", "胡适");
-//		Assertions.assertNotEquals(0, d);
-//		log.debug("测试通过！");
-//	}
+	/**
+	 * 新增值班信息
+	 */
+	@Test
+	void test_insert() {
+		System.out.println("测试开始，新增值班信息：");
+		boolean d = dutyService.insert("周一", "胡适");
+		Assertions.assertNotEquals(0, d);
+		log.debug("测试通过！");
+	}
 //	
 //	/**
 //	 * 更新值班信息

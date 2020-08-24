@@ -67,4 +67,9 @@ public interface DutyRepository extends JpaRepository<Duty, Integer>{
 	@Query(nativeQuery = true,value = "SELECT duty.did,duty.dtime,duty.eid,employee.ename,employee.position FROM duty,employee WHERE duty.eid = employee.eid AND duty.dtime = ?1 AND duty.eid = ?2")
 	Duty findByDtimeAndEid(@Param("dtime") String dtime,@Param("eid") Integer eid);
 	
+	/**
+	 * 根据值班时间和员工姓名查询值班信息
+	 */
+	@Query(nativeQuery = true,value = "SELECT duty.did,duty.dtime,duty.eid,employee.ename,employee.position FROM duty,employee WHERE duty.eid = employee.eid AND duty.dtime = ?1 AND employee.ename = ?2")
+	Duty findByDtimeAndEname(@Param("dtime")String dtime,@Param("ename") String ename);
 }

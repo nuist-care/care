@@ -42,23 +42,33 @@ class ClientDaoTest {
 //	}	
 	
 	/**
-	 * 测试新增客户
+	 * 测试根据客户姓名查询客户
 	 */
 	@Test
-	void test_update() {
-		Client client = Client.builder()
-				.aid(100002)
-				.aname("张强")
-				.aage(88)
-				.asex("男")
-				.aIDnumber("123")
-				.atelephone("123")
-				.clevel(3)
-				.build();
-		int line = clientRepository.update(client.getAid(), client.getAname(), client.getAsex(), client.getAage(), client.getAIDnumber(),
-				client.getAtelephone(), client.getAaddress(), client.getGenetichistory(), 
-				client.getConditiondescription(), client.getClevel());
-		log.info("更新成功"+line);	
+	void test_findByAname() {
+		String aname = new String("李四");
+		Client client = clientRepository.findByAname(aname);
+		log.info(client.toString());
 	}
+	
+	/**
+	 * 测试新增客户
+	 */
+//	@Test
+//	void test_update() {
+//		Client client = Client.builder()
+//				.aid(100002)
+//				.aname("张强")
+//				.aage(88)
+//				.asex("男")
+//				.aIDnumber("123")
+//				.atelephone("123")
+//				.clevel(3)
+//				.build();
+//		int line = clientRepository.update(client.getAid(), client.getAname(), client.getAsex(), client.getAage(), client.getAIDnumber(),
+//				client.getAtelephone(), client.getAaddress(), client.getGenetichistory(), 
+//				client.getConditiondescription(), client.getClevel());
+//		log.info("更新成功"+line);	
+//	}
 	
 }
