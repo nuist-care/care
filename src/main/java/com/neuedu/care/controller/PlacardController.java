@@ -96,8 +96,6 @@ public class PlacardController {
 		return r;
 	}
 	
-	
-	
 	/**
 	 * 修改公告信息
 	 * @param pid

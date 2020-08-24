@@ -16,7 +16,7 @@ public interface PlacardService {
 	/**
 	 * 新增公告
 	 * @param placard 公告信息对象
-	 * @return 是否成功标志
+	 * @return 
 	 */
 	Placard insert(Placard placard);
 	
@@ -35,14 +35,14 @@ public interface PlacardService {
 	/**
 	 * 根据公告编号删除公告信息
 	 * @param pid 公告编号
-	 * @return 是否成功标志
+	 * @return 
 	 */
 	int delete(Integer pid);
 	
 	/**
 	 * 根据公告编号查询公告信息
 	 * @param pid 公告编号
-	 * @return 是否成功标志
+	 * @return 
 	 */
 	Placard selectByPid(Integer pid);
 	
