@@ -1,5 +1,6 @@
 package com.neuedu.care.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -16,24 +17,6 @@ public class VisitingServiceImpl implements VisitingService{
 	public VistingRepository vistingRepository;
 
 	@Override
-	public boolean insert(Visiting visiting) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean update(Visiting visiting) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public List<Visiting> findAll() {
-		// TODO Auto-generated method stub
-		return vistingRepository.findAll();
-	}
-
-	@Override
 	public List<Visiting> findByVidAidAname(Integer vid, Integer aid, String aname) {
 		//业务逻辑判断
 		if(vid!=null&&vid<1) {
@@ -47,6 +30,38 @@ public class VisitingServiceImpl implements VisitingService{
 			
 		}
 		return vistingRepository.findByVidAidAname(vid, aid, aname); 
+	}
+
+	@Override
+	public boolean updateVisiting(Integer vid, Integer aid, String aname, String vhospital, Date vtime, String vroom,
+			String vresult) {
+		int line=vistingRepository.updateVisiting(vid, aid, aname, vhospital, vtime, vroom, vresult);
+		return line==1?true:false;
+	}
+
+
+
+	@Override
+	public boolean addVisiting(Integer aid, String vhospital, Date vtime, String vroom, String vresult) {
+		int line=vistingRepository.addVisiting(aid, vhospital, vtime, vroom, vresult);
+		return line==1?true:false;
+		
+		
+	}
+
+
+
+	@Override
+	public List<Visiting> findAllVisiting() {
+		return vistingRepository.findAllVisiting();
+	}
+
+	@Override
+	public Visiting findByVid(Integer vid) {
+		if (null == vid || vid < 1) {
+			return null;
+		}
+		return vistingRepository.findByVid(vid);
 	}
 	 
 
