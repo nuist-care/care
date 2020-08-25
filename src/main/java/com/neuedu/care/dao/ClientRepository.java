@@ -35,6 +35,13 @@ public interface ClientRepository extends JpaRepository<Client, Integer>{
 	List<Client> findByAidOrAnameContainingOrClevel(@Param("aid")Integer aid,@Param("aname")String aname,@Param("clevel")Integer clevel);
 	
 	/**
+	 * 根据客户姓名精确查询客户信息
+	 * @param aname
+	 * @return
+	 */
+	Client findByAname(String aname);
+	
+	/**
 	 * 更新客户信息
 	 * @param aid
 	 * @param aname

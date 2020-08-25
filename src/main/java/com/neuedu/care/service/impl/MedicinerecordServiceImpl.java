@@ -4,9 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.neuedu.care.dao.MedicinerecordRepository;
 import com.neuedu.care.entity.Medicinerecord;
@@ -27,7 +24,6 @@ public class MedicinerecordServiceImpl implements MedicinerecordService {
 	/**
 	 * 根据用药记录编号修改实际用药时间
 	 */
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Override
 	public boolean update(Integer mrid, String actualtime) {
 		// 业务判断：非空属性判断
@@ -41,7 +37,6 @@ public class MedicinerecordServiceImpl implements MedicinerecordService {
 	/**
 	 * 根据药品名称和客户姓名进行多条件模糊查询
 	 */
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Override
 	public List<Medicinerecord> findByCondition(String mname, String aname) {
 		// 字符串主动去除空格
@@ -63,7 +58,6 @@ public class MedicinerecordServiceImpl implements MedicinerecordService {
 	/**
 	 * 查询所有用药记录信息
 	 */
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Override
 	public List<Medicinerecord> selectAll() {
 		return medicinerecordRepository.findAll();
@@ -72,7 +66,6 @@ public class MedicinerecordServiceImpl implements MedicinerecordService {
 	/**
 	 * 根据用药记录编号查询用药记录信息
 	 */
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Override
 	public Medicinerecord findByMrid(Integer mrid) {
 		// 业务判断：服务编号不能为null且不能小于1
