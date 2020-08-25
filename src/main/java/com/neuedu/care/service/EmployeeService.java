@@ -43,6 +43,13 @@ public interface EmployeeService {
 	 * @return
 	 */
 	List<Employee> findCondition(Integer eid,String ename,String position);
+	
+	/**
+	 * 查询所有医生和护工的信息 by马梦瑶
+	 * @return
+	 */
+	List<Employee> findAllByPosition();
+	
 	/**
 	 * 新增用户
 	 * @param employee

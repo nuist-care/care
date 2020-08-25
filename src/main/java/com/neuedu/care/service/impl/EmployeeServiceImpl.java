@@ -39,6 +39,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee = employeeRepository.findByEidAndPassword(eid, epassword);
 		return employee;
 	}
+	
 	/**
 	 * 实现查询所有用户
 	 */
@@ -47,6 +48,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		List<Employee> employees = employeeRepository.findAll();
 		return employees;
 	}
+	
 	/**
 	 * 实现新增功能
 	 */
@@ -55,6 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee e = employeeRepository.save(employee);
 		return e;
 	}
+	
 	/**
 	 * 实现多条件查询
 	 */
@@ -64,12 +67,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 		List<Employee> employees = employeeRepository.findByEidOrEnameContainingOrPosition(eid, ename, position);
 		return employees;
 	}
+	
 	@Override
 	public int update(Integer eid, String ename, String esex, Integer eage, String eIDnumber, String etelephone,
 			String eaddress, Date worktime, Integer workage, String position) {
 		int line = employeeRepository.update(eid, ename, esex, eage, eIDnumber, etelephone, eaddress, worktime, workage, position);
 		return line;
 	}
+	
 	@Override
 	public int delete(Integer eid) {
 		int line = 0;
@@ -81,14 +86,24 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		return line;
 	}
+	
 	@Override
 	public Employee findByEid(Integer eid) {
 		Employee employee = employeeRepository.findByEid(eid);
 		return employee;
 	}
+	
 	@Override
 	public Page<Employee> findAll(Pageable pageable) {
 		Page<Employee> ePage = employeeRepository.findAll(pageable);
 		return ePage;
+	}
+	
+	/**
+	 * 查询所有医生和护工的信息 by马梦瑶
+	 */
+	@Override
+	public List<Employee> findAllByPosition() {
+		return employeeRepository.findAllByPosition();
 	}	
 }

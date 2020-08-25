@@ -163,4 +163,17 @@ public class EmployeeController {
 		}
 		return r;
 	}
+	
+	/**
+	 * 显示所有医生和护工信息 by马梦瑶
+	 * @return 返回JSON数据
+	 */
+	@ApiOperation(value = "显示所有医生和护工信息页面：数据存储在care中")
+	@GetMapping(value = "/slist")
+	@ResponseBody
+	public ResultBean slist() {
+		List<Employee> employees = employeeService.findAllByPosition();
+		ResultBean r = new ResultBean(200, true, "查询所有医生和护工信息成功！", employees);
+		return r;
+	}
 }
