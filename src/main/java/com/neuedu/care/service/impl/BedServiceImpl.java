@@ -73,4 +73,15 @@ public class BedServiceImpl implements BedService{
 		return beds;
 	}
 
+	/**
+	 * 根据客户编号查询床位信息 by马梦瑶
+	 */
+	@Override
+	public Bed findByAid(Integer aid) {
+		if (null == aid) {
+			return null;
+		}
+		return bedRepository.findByAid(aid);
+	}
+
 }

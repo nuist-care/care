@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
+import com.neuedu.care.entity.Bed;
 import com.neuedu.care.entity.Client;
 import com.neuedu.care.entity.Employee;
 import com.neuedu.care.entity.Serve;
+import com.neuedu.care.service.BedService;
 import com.neuedu.care.service.ClientService;
 import com.neuedu.care.service.EmployeeService;
 import com.neuedu.care.service.ServeService;
@@ -44,6 +46,9 @@ public class ServeController {
 
 	@Autowired
 	private ClientService clientService;
+	
+	@Autowired
+	private BedService bedService;
 	
 	/**
 	 * 显示所有服务信息页面
@@ -114,8 +119,11 @@ public class ServeController {
 		serve.setPosition(employee.getPosition());
 		Client client = clientService.findByid(serve.getAid()); // 根据前端传来的客户编号，获取对应客户信息
 		serve.setAname(client.getAname());
-		// TODO set楼层、房间号、床号
-		
+		Bed bed = bedService.findByAid(serve.getAid()); // 根据前端传来的客户编号，获取对应床位信息
+		serve.setFloor(bed.getFloor());
+		serve.setRoom(bed.getRoom());
+		serve.setBnum(bed.getBnum());
+		System.out.println(serve);
 		if (bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {

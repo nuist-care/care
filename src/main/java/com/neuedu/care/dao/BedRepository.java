@@ -40,4 +40,9 @@ public interface BedRepository extends JpaRepository<Bed, Integer>{
 	@Modifying
 	@Transactional
 	List<Bed> findByFloorAndRoomAndBnum(@Param("floor")Integer floor,@Param("room")Integer room,@Param("bnum")Integer bnum);
+
+	/**
+	 * 根据客户编号查询床位信息 by马梦瑶
+	 */
+	Bed findByAid(Integer aid);
 }
