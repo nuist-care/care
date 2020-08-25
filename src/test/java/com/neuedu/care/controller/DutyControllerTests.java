@@ -25,10 +25,10 @@ public class DutyControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
 	
-	@Test
-	void test() throws Exception {
-		mockMvc.perform(MockMvcRequestBuilders.get("/duty/dutylist"))
-			.andExpect(MockMvcResultMatchers.status().isOk());
-	}
+//	@Test
+//	void test() throws Exception {
+//		mockMvc.perform(MockMvcRequestBuilders.get("/duty/dutylist"))
+//			.andExpect(MockMvcResultMatchers.status().isOk());
+//	}
 
 }

@@ -30,21 +30,18 @@ public interface MedicinerecordRepository extends JpaRepository<Medicinerecord, 
 	/**
 	 * 根据药品名称和客户姓名进行多条件模糊查询
 	 */
-	@Transactional
 	@Query(nativeQuery = true, value = "select medicinerecord.mrid,medicine.mname,client.aname,medicine.prescribedtime,medicine.msize,medicinerecord.actualtime FROM medicinerecord,medicine,client WHERE medicinerecord.aid = client.aid AND medicinerecord.mid = medicine.mid AND medicine.mname like concat ('%', ?1, '%') AND client.aname like concat ('%', ?2, '%')")
 	List<Medicinerecord> findByMnameContainingAndAnameContaining(@Param("mname")String mname, @Param("aname")String aname);
 	
 	/**
 	 * 查询所有用药记录信息
 	 */
-	@Transactional
 	@Query(nativeQuery = true, value = "select medicinerecord.mrid,medicine.mname,client.aname,medicine.prescribedtime,medicine.msize,medicinerecord.actualtime FROM medicinerecord,medicine,client WHERE medicinerecord.aid = client.aid AND medicinerecord.mid = medicine.mid")
 	List<Medicinerecord> findAll();
 
 	/**
 	 * 根据用药记录编号查询用药记录信息
 	 */
-	@Transactional
 	@Query(nativeQuery = true, value = "select medicinerecord.mrid,medicine.mname,client.aname,medicine.prescribedtime,medicine.msize,medicinerecord.actualtime FROM medicinerecord,medicine,client WHERE medicinerecord.aid = client.aid AND medicinerecord.mid = medicine.mid AND medicinerecord.mrid = ?1")
 	Medicinerecord findByMrid(Integer mrid);
 

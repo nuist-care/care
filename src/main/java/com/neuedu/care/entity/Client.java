@@ -21,6 +21,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 客户实体类ClientGo
+ * @author 姚季
+ *
+ */
 @ApiModel(value = "JPA实体类Client客户员工信息表")
 @Entity
 @Table(name = "client")
@@ -30,11 +35,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Client implements Serializable{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	/**
 	 * 客户编号
 	 */
+	@ApiModelProperty(value = "客户编号")
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer aid;
 	
 	/**

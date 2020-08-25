@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
@@ -82,7 +83,9 @@ public class Duty implements Serializable{
 	 */
 	@ApiModelProperty(value = "员工职位")
 	@NotBlank(message = "员工职位不能为空！")
+	@Pattern(regexp = "^护士$",message = "该护士不存在！请重新输入！")
 	@Length(min = 2,max = 2,message = "员工职位不合法！")
+	
 	@Column(name = "position", table = "employee")
 	private String position;
 

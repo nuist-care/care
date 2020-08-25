@@ -29,18 +29,15 @@ public interface LevelRepository extends JpaRepository<Level, Integer>{
 	/** 
 	 * 根据客户姓名进行模糊查询
 	 */
-	@Transactional
 	List<Level> findByAnameContaining(@Param("aname")String aname);
 	
 	/**
 	 * 查询所有护理级别信息
 	 */
-	@Transactional
 	List<Level> findAll();
 
 	/**
 	 * 根据客户编号查询护理级别信息
 	 */
-	@Transactional
 	Level findByAid(Integer aid);
 }
