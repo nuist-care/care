@@ -1,7 +1,6 @@
 package com.neuedu.care.service.impl;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,6 +78,17 @@ public class ClientServiceImpl implements ClientService {
 			String aaddress, String genetichistory, String conditiondescription, Integer clevel) {
 		int line = clientRepository.update(aid, aname, asex, aage, aIDnumber, atelephone, aaddress, genetichistory, conditiondescription, clevel);
 		return line;
+	}
+
+	/**
+	 * 根据客户姓名精确查询客户信息
+	 */
+	@Override
+	public Client findByAname(String aname) {
+		if (org.apache.commons.lang3.StringUtils.isBlank(aname) || aname.length() < 2) {
+			return null;
+		}
+		return clientRepository.findByAname(aname);
 	}
 
 

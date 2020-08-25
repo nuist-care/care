@@ -45,8 +45,8 @@ public class ServeServiceTests {
 				.eid(10002)
 				.aid(2)
 				.build();
-		boolean s = serveService.insert(serve);
-		Assertions.assertNotEquals(0, s);
+		Serve s = serveService.insert(serve);
+		Assertions.assertNotEquals(null, s);
 		log.debug("测试通过！");
 	}
 	

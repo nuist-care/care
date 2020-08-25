@@ -1,9 +1,6 @@
 package com.neuedu.care.service;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.repository.query.Param;
 
 import com.neuedu.care.entity.Client;
 
@@ -32,6 +29,13 @@ public interface ClientService {
 	 * @return
 	 */
 	List<Client> findByCondition(Integer aid,String aname,Integer clevel);
+	
+	/**
+	 * 根据客户姓名精确查询客户信息
+	 * @param aname
+	 * @return
+	 */
+	Client findByAname(String aname);
 	
 	/**
 	 * 新增客户
