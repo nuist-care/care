@@ -27,7 +27,7 @@ public interface BedService {
 	 * @param aid
 	 * @return
 	 */
-	int update(Integer bid,Integer floor,Integer room,Integer bnum,Integer aid);
+	int update(Integer bid,Integer aid);
 	
 	/**
 	 * 根据床位编号删除床位信息
@@ -53,4 +53,13 @@ public interface BedService {
 	 * 根据客户编号查询床位信息 by马梦瑶
 	 */
 	Bed findByAid(Integer aid);
+	
+	/**
+	 * 根据楼层号，房间号，床位号查询床位信息
+	 * @param floor
+	 * @param room
+	 * @param bnum
+	 * @return
+	 */
+	List<Bed> findByFloorAndRoomAndBnum(Integer floor,Integer room,Integer bnum);
 }

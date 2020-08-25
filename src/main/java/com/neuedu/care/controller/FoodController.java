@@ -44,7 +44,6 @@ public class FoodController {
 	 */
 	@ApiIgnore(value = "展示所有膳食信息")
 	@GetMapping(value = "/list")
-	@ResponseBody
 	public ResultBean list() {
 		List<Food> foods = foodService.selectAll();
 		System.out.println("请求所有膳食信息：" + foods);
@@ -60,7 +59,6 @@ public class FoodController {
 	 * @return
 	 */
 	@PostMapping(value = "/insert")
-	@ResponseBody
 	public ResultBean insert(@Validated Food food, BindingResult bindingResult) {
 		ResultBean r = new ResultBean();
 		if (bindingResult.hasErrors()) {
@@ -88,7 +86,6 @@ public class FoodController {
 	 */
 	@ApiOperation(value = "根据编号查询膳食信息")
 	@GetMapping(value = "/{fid}")
-	@ResponseBody
 	public ResultBean detail(@PathVariable("fid") Integer fid) {
 		Food food = foodService.selectByFid(fid);
 		ResultBean r = new ResultBean(200, true, "查询成功", food);
@@ -104,7 +101,6 @@ public class FoodController {
 	 * @return
 	 */
 	@PutMapping(value = "/update/{fid}")
-	@ResponseBody
 	public ResultBean update(@PathVariable("fid") Integer fid, @Validated Food food, BindingResult bindingResult) {
 		ResultBean r = new ResultBean();
 		if (bindingResult.hasErrors()) {
@@ -132,7 +128,6 @@ public class FoodController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/delete/{fid}")
-	@ResponseBody
 	public ResultBean delete(@PathVariable("fid") Integer fid) {
 		int line = foodService.delete(fid);
 		ResultBean r = null;
@@ -151,7 +146,6 @@ public class FoodController {
 	 * @return
 	 */
 	@ApiOperation(value = "根据客户编号查询膳食信息")
-	@ResponseBody
 	@GetMapping(value = "/find")
 	public ResultBean find(Integer aid) {
 		List<Food> foods = foodService.findByAid(aid);
@@ -166,7 +160,6 @@ public class FoodController {
 	 */
 	@ApiIgnore(value = "膳食日历")
 	@GetMapping(value = "/show")
-	@ResponseBody
 	public ResultBean show() {
 		List<Food> foods = foodService.selectAll2();
 		System.out.println("请求所有膳食信息：" + foods);

@@ -31,8 +31,8 @@ public interface BedRepository extends JpaRepository<Bed, Integer>{
 	 */
 	@Modifying
 	@Transactional
-	@Query(nativeQuery = true,value = "update bed set floor=?2,room=?3,bnum=?4,aid=?5 where bid=?1")
-	int updateByBid(@Param("bid")Integer bid,@Param("floor")Integer floor,@Param("room")Integer room,@Param("bnum")Integer bnum,@Param("aid")Integer aid);
+	@Query(nativeQuery = true,value = "update bed set aid=?2 where bid=?1")
+	int updateByBid(@Param("bid")Integer bid,@Param("aid")Integer aid);
 
 	/**
 	 * 根据楼层号，房间号，床位号查询床位信息
