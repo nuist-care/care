@@ -1,5 +1,6 @@
 package com.neuedu.care.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.neuedu.care.entity.Nurseing;
@@ -16,14 +17,14 @@ public interface NurseingService {
 	 * @param nurseing 护理记录对象
 	 * @return 是否成功新增
 	 */
-	boolean insert(Nurseing nurseing);
+	Nurseing insert(Nurseing nurseing);
 	
 	/**
 	 * 修改护理记录信息
 	 * @param nurseing 护理记录对象
 	 * @return 是否成功修改
 	 */
-	boolean update(Nurseing nurseing);
+	boolean update(Integer cid,String ccontent);
 	
 	/**
 	 * 根据客户姓名进行模糊查询
@@ -44,5 +45,13 @@ public interface NurseingService {
 	 * @return 护理记录对象
 	 */
 	Nurseing findByCid(Integer cid);
+	
+	/**
+	 * 根据客户姓名和护理时间精确查询护理记录信息
+	 * @param aname 客户姓名
+	 * @param ctime 护理时间
+	 * @return 护理记录对象集合
+	 */
+	Nurseing findByAnameAndCtime(String aname,Date ctime);
 
 }

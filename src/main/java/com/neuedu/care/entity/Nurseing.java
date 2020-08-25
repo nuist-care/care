@@ -12,6 +12,7 @@ import javax.persistence.SecondaryTable;
 import javax.persistence.SecondaryTables;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 import org.hibernate.validator.constraints.Length;
@@ -23,6 +24,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 /**
  * JPA实体类Nurseing：护理记录管理
@@ -77,7 +79,7 @@ public class Nurseing implements Serializable{
 	 */
 	@ApiModelProperty(value = "护理时间")
 	@Past(message = "护理时间不合法！请勿填写未来日期！")
-	@NotBlank(message = "护理时间不能为空！")
+	@NotNull(message = "护理时间不能为空！")
 	@Column(name = "ctime", table = "nurseing")
 	private Date ctime;
 	
@@ -86,7 +88,7 @@ public class Nurseing implements Serializable{
 	 */
 	@ApiModelProperty(value = "员工编号")
 	@Range(min = 10001,message = "员工编号不合法！")
-	@NotBlank(message = "员工编号不能为空！")
+	@NotNull(message = "员工编号不能为空！")
 	@Column(name = "eid", table = "nurseing")
 	private Integer eid;
 	
