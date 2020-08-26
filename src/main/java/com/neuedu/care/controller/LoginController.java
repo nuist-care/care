@@ -1,5 +1,8 @@
 package com.neuedu.care.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +58,10 @@ public class LoginController {
 		if (employee != null) {
 			employee.setPassword("******");
 			String token = JWTTokenUtil.createJWT(""+employee.getEid(), employee.getEname(), audience);
-			r = new ResultBean(200,true,"登陆成功",token);
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("e", employee);
+			map.put("token", token);
+			r = new ResultBean(200,true,"登陆成功",map);
 		}else {
 			r = new ResultBean(5001,false,"登陆失败",null);
 		}
