@@ -2,6 +2,8 @@ package com.neuedu.care.dao;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -57,12 +59,38 @@ class GoDaoTest {
 //			log.info(go.toString());	
 //	}
 	
+//	/**
+//	 * 
+//	 */
+//	@Test
+//	void test_delete() {
+//		int line = goRepository.deleteByGid(100001);
+//		log.info("删除成功"+line);	
+//	}
+	
+//	/**
+//	 * @throws ParseException 
+//	 * 
+//	 */
+//	@Test
+//	void test_insert() throws ParseException {
+//		for(int i = 0;i<10;i++) {
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//		int line = goRepository.insert(2, "七夕", sdf.parse("2020-02-12"), "2天", null, "姚季", "审批中");
+//		log.info(line+"ok");
+//		}
+//	}
+	
 	/**
+	 * @throws ParseException 
 	 * 
 	 */
 	@Test
-	void test_delete() {
-		int line = goRepository.deleteByGid(100001);
-		log.info("删除成功"+line);	
+	void test_update() throws ParseException {
+		for(int i = 0;i<10;i++) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		int line = goRepository.update(100011,22, "七夕3", sdf.parse("2020-03-12"), "2天", null, "姚季", "审批");
+		log.info(line+"ok");
+		}
 	}
 }

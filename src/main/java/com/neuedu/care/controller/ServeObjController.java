@@ -32,7 +32,6 @@ public class ServeObjController {
 	 * 根据护工编号查询服务对象信息
 	 */
 	@ApiOperation(value="根据护工编号查询服务对象信息")
-	@ResponseBody
 	@GetMapping(value = "/{eid}")
 	public ResultBean find(@PathVariable("eid")Integer eid) {
 		List<ServeObj> serveObjs = serveObjService.findByEid(eid);

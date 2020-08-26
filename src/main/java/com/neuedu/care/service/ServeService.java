@@ -22,7 +22,7 @@ public interface ServeService {
 	 * @param serve 服务信息对象
 	 * @return 是否成功新增
 	 */
-	boolean insert(Serve serve);
+	Serve insert(Serve serve);
 	
 	/**
 	 * 根据服务编号查询服务信息
@@ -44,4 +44,12 @@ public interface ServeService {
 	 * @return 服务信息对象集合
 	 */
 	List<Serve> findByEnameContainingAndAnameContaining(String ename, String aname);
+	
+	/**
+	 * 根据员工编号和客户编号精确查询服务对象信息
+	 * @param eid 员工编号
+	 * @param aid 客户编号
+	 * @return 服务信息对象
+	 */
+	Serve findByEidAndAid(Integer eid, Integer aid);
 }

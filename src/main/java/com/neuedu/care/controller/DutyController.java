@@ -68,7 +68,7 @@ public class DutyController {
 	@ApiOperation(value = "根据值班时间和值班人员进行多条件模糊查询：数据存储在care中")
 	@ApiImplicitParams(value = {
 			@ApiImplicitParam(paramType = "query", name = "dtime", value = "值班时间", dataType = "String"),
-			@ApiImplicitParam(paramType = "query", name = "dnurse", value = "值班人员", dataType = "String"), })
+			@ApiImplicitParam(paramType = "query", name = "dnurse", value = "值班人员", dataType = "String")})
 	@GetMapping(value = "/find")
 	public ResultBean find(String dtime, String dnurse) {
 		List<Duty> duties = dutyService.findByCondition(dtime, dnurse);

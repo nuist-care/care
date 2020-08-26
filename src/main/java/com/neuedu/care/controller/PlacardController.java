@@ -45,7 +45,6 @@ public class PlacardController {
 	 */
 	@ApiOperation(value = "显示所有公告信息页面")
 	@GetMapping(value = "/list")
-	@ResponseBody
 	public ResultBean list() {
 		List<Placard> placards = placardService.selectAll();
 		System.out.println("请求所有公告信息：" + placards);
@@ -60,7 +59,6 @@ public class PlacardController {
 	 * @return
 	 */
 	@PostMapping(value = "/insert")
-	@ResponseBody
     public ResultBean insert(@Validated Placard placard,BindingResult bindingResult){
   	ResultBean r = new ResultBean();
   	if (bindingResult.hasErrors()) {
@@ -86,10 +84,7 @@ public class PlacardController {
 	 * @return
 	 */
 	@ApiOperation(value="根据编号查询公告信息")
-//    @ApiImplicitParam(paramType="path",name="pid",value = "编号",required = true,dataType = "int")
-//    @ApiResponse(code = 200,message = "返回placard_update.html页面")
     @GetMapping(value = "/{pid}")
-	@ResponseBody
     public ResultBean detail(@PathVariable("pid")Integer pid) {
 		Placard placard = placardService.selectByPid(pid);
 		ResultBean r = new ResultBean(200,true,"查询成功",placard);
@@ -104,7 +99,6 @@ public class PlacardController {
 	 * @return
 	 */
 	@PutMapping(value = "/update/{pid}")
-	@ResponseBody
     public ResultBean update(@PathVariable("pid")Integer pid,@Validated Placard placard,BindingResult bindingResult){
   	ResultBean r = new ResultBean();
   	if (bindingResult.hasErrors()) {
@@ -131,7 +125,6 @@ public class PlacardController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/delete/{pid}")
-	@ResponseBody
     public ResultBean delete(@PathVariable("pid")Integer pid) {
    	int line = placardService.delete(pid);
    	ResultBean r = null;
@@ -151,12 +144,6 @@ public class PlacardController {
 	  * @return
 	  */
 	 @ApiOperation(value="根据部门编号，作者，类型组合模糊查询")
-//	 @ApiImplicitParams(value= {
-//	    @ApiImplicitParam(paramType = "query",name = "pid",value = "编号",dataType = "String"),
-//	    @ApiImplicitParam(paramType = "query",name = "pauthor",value = "作者",dataType = "String"),
-//	    @ApiImplicitParam(paramType = "query",name = "ptype",value = "类型",dataType = "String")
-//	 })
-	 @ResponseBody
 	 @GetMapping(value = "/find")
 	 public ResultBean find(Integer pid,String pauthor,String ptype) {
 	 	List<Placard> placards = placardService.findByCondition(pid, pauthor, ptype);

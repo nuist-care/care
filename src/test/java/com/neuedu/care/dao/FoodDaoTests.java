@@ -31,13 +31,13 @@ public class FoodDaoTests {
 	/**
 	 * 对selectById()函数进行测试
 	 */
-//	@Test
-//	public void test_selectById() {
-//		Integer fid = new Integer(1);
-//		Food food = foodRepository.findById(fid).get();
-//		Assertions.assertEquals(fid.intValue(),food.getFid().intValue());
-//		log.debug("测试通过");
-//	}
+	@Test
+	public void test_selectById() {
+		Integer fid = new Integer(1);
+		Food food = foodRepository.findById(fid).get();
+		Assertions.assertEquals(fid.intValue(),food.getFid().intValue());
+		log.debug("测试通过");
+	}
 	
 	/**
 	 * 对findAll()函数进行测试

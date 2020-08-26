@@ -58,5 +58,5 @@ public interface NurseingRepository extends JpaRepository<Nurseing, Integer>{
 	 * 根据客户姓名和护理时间精确查询护理记录信息
 	 */
 	@Query(nativeQuery = true, value = "SELECT nurseing.cid, client.aname, nurseing.ccontent, nurseing.ctime, nurseing.eid, employee.ename FROM nurseing,client,employee WHERE nurseing.aid = client.aid AND nurseing.eid = employee.eid AND client.aname = ?1 AND nurseing.ctime = ?2")
-	List<Nurseing> findByAnameAndCtime(@Param("aname") String aname, @Param("ctime") Date ctime);
+	Nurseing findByAnameAndCtime(@Param("aname") String aname, @Param("ctime") Date ctime);
 }
