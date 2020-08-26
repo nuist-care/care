@@ -3,6 +3,8 @@ package com.neuedu.care.dao;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -35,7 +37,7 @@ public interface GoRepository extends JpaRepository<Go, Integer> {
 	 * @return
 	 */
 	@Query(nativeQuery = true,value = "select client.aname,go.gotime,go.gid,go.aid,go.goreason,go.applytime,go.escort,go.approver,go.approvalstatus from go,client where go.aid = client.aid")
-	List<Go> findInfo();
+	Page<Go> findInfo(Pageable pageable);
 	
 	/**
 	 * 根据编号查询外出表记录

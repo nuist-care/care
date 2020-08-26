@@ -22,11 +22,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 客户实体类ClientGo
+ * 客户实体类Client
  * @author 姚季
  *
  */
-@ApiModel(value = "JPA实体类Client客户员工信息表")
+@ApiModel(value = "JPA实体类Client客户信息表")
 @Entity
 @Table(name = "client")
 @Data

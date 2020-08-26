@@ -12,6 +12,11 @@ import com.neuedu.care.entity.Client;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * ClientRepository 函数测试类：ClientDaoTest
+ * @author 姚季
+ *
+ */
 @SpringBootTest
 @Slf4j
 class ClientDaoTest {

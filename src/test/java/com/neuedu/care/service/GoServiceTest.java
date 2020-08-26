@@ -14,6 +14,11 @@ import com.neuedu.care.entity.Go;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 业务逻辑接口GoServiceTest测试类
+ * @author 姚季
+ *
+ */
 @SpringBootTest
 @Slf4j
 class GoServiceTest {

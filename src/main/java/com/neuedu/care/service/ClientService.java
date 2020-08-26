@@ -2,6 +2,9 @@ package com.neuedu.care.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.neuedu.care.entity.Client;
 
 /**
@@ -10,6 +13,8 @@ import com.neuedu.care.entity.Client;
  *
  */
 public interface ClientService {
+	
+	Page<Client> findAll(Pageable pageable);
 	/**
 	 * 查询所有客户
 	 * @return

@@ -11,6 +11,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
 import com.neuedu.care.converter.MyDateConverter;
+import com.neuedu.care.intercepter.LoginIntercepter;
 
 
 
@@ -18,19 +19,19 @@ import com.neuedu.care.converter.MyDateConverter;
 public class CareConfig extends WebMvcConfigurationSupport{
 	@Autowired
 	private MyDateConverter myDateConverter;
-//	@Autowired
-//	private LoginIntercepter loginIntercepter;
-//	
-//	@Override
-//	protected void addInterceptors(InterceptorRegistry registry) {
-//		registry.addInterceptor(loginIntercepter)
-//		.addPathPatterns("/**")
-//		.excludePathPatterns("/login","/checklogin","/exit",
-//				"/druid/**",
-//				"/swagger-ui.html/**","/v2/**","/swagger-resources/**",
-//				"/webjars/**");
-//		super.addInterceptors(registry);
-//	}
+	@Autowired
+	private LoginIntercepter loginIntercepter;
+	
+	@Override
+	protected void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(loginIntercepter)
+		.addPathPatterns("/**")
+		.excludePathPatterns("/login","/checklogin","/exit",
+				"/druid/**",
+				"/swagger-ui.html/**","/v2/**","/swagger-resources/**",
+				"/webjars/**");
+		super.addInterceptors(registry);
+	}
 	
 	@Override
 	protected void addFormatters(FormatterRegistry registry) {

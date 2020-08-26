@@ -3,6 +3,9 @@ package com.neuedu.care.service;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.neuedu.care.entity.Go;
 
 
@@ -17,7 +20,7 @@ public interface GoService {
 	 * 查询所有客户
 	 * @return
 	 */
-	List<Go> findAll();
+	Page<Go> findAll(Pageable pageable);
 	
 	/**
 	 * 查询一个用户

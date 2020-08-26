@@ -1,9 +1,13 @@
 package com.neuedu.care.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
 import com.neuedu.care.config.Audience;
@@ -19,7 +23,7 @@ import io.swagger.annotations.ApiOperation;
  *
  */
 @Api(tags = "登录控制器")
-@Controller
+@RestController
 public class LoginController {
 	@Autowired
 	private EmployeeService employeeService;
@@ -33,7 +37,6 @@ public class LoginController {
 	 */
 	@ApiOperation(value = "登录")
 	@PostMapping(value = "checklogin")
-	@ResponseBody
 	public ResultBean checklogin(Integer eid,String password) {
 		ResultBean r = null;
 		if (eid == null || password == null) {
@@ -51,11 +54,21 @@ public class LoginController {
 		Employee employee = employeeService.login(eid, password);
 		if (employee != null) {
 			employee.setPassword("******");
-			//String token = JWTTokenUtil.createJWT(""+employee.getEid(), employee.getName(), audience);
-			r = new ResultBean(200,true,"登陆成功",employee);
+			String token = JWTTokenUtil.createJWT(""+employee.getEid(), employee.getEname(), audience);
+			r = new ResultBean(200,true,"登陆成功",token);
 		}else {
 			r = new ResultBean(5001,false,"登陆失败",null);
 		}
 		return r;
+	}
+	
+	/**
+	 * 登出
+	 * @return
+	 */
+	@ApiOperation(value = "登出")
+	@GetMapping(value = "exit")
+	public ResultBean exit() {
+		return new ResultBean(5007,true,"注销成功",null);
 	}
 }

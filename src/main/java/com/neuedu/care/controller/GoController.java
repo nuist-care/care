@@ -3,6 +3,9 @@ package com.neuedu.care.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -22,6 +25,11 @@ import com.neuedu.care.service.GoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * 外出记录操作控制器
+ * @author 姚季
+ *
+ */
 @Api(tags = ("外出记息操作控制器"))
 @RestController
 @RequestMapping(value = "go")
@@ -35,8 +43,10 @@ public class GoController {
 	 */
 	@ApiOperation(value = " 显示所有外出记录")
 	@GetMapping(value = "/list")
-	public ResultBean list() {
-		List<Go> gos = goService.findAll();
+	public ResultBean list(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
+			@RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize) {
+		Pageable pageable = PageRequest.of(pageNum-1, pageSize);
+		Page<Go> gos = goService.findAll(pageable);
 		return new ResultBean(200,true,"显示所有客户信息成功",gos);
 	}
 

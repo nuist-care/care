@@ -45,7 +45,7 @@ public class EmployeeController {
 	@GetMapping(value = "/list")
 	public ResultBean list(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
 			@RequestParam(value = "pageSize",defaultValue = "5")Integer pageSize) {
-		Pageable pageable = PageRequest.of(pageNum-1, pageSize);
+		Pageable pageable = PageRequest.of(pageNum-1, 5);
 		Page<Employee> employees = employeeService.findAll(pageable);
 		ResultBean r = new ResultBean(200,true,"显示所有部门信息成功",employees);
 		return r;

@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.neuedu.care.dao.ClientRepository;
@@ -30,8 +32,8 @@ public class GoServiceImpl implements GoService {
 	 * 查询所有外出记录
 	 */
 	@Override
-	public List<Go> findAll() {
-		List<Go> gos = goRepository.findInfo();
+	public Page<Go> findAll(Pageable pageable) {
+		Page<Go> gos = goRepository.findInfo(pageable);
 		return gos;
 	}
 

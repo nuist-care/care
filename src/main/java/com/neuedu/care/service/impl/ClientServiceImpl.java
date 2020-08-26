@@ -3,6 +3,8 @@ package com.neuedu.care.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.neuedu.care.dao.ClientRepository;
@@ -91,5 +93,10 @@ public class ClientServiceImpl implements ClientService {
 		return clientRepository.findByAname(aname);
 	}
 
+	@Override
+	public Page<Client> findAll(Pageable pageable) {
+		Page<Client> ePage = clientRepository.findAll(pageable);
+		return ePage;
+	}
 
 }
