@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.neuedu.care.entity.Bed;
 
+import lombok.experimental.PackagePrivate;
+
 /**
  * JPA数据访问层接口 BedRepository
  * @author ASUS
@@ -20,9 +22,32 @@ import com.neuedu.care.entity.Bed;
 public interface BedRepository extends JpaRepository<Bed, Integer>{
 	
 	/**
+	 * 根据编号删除床位信息
+	 * @param bid
+	 * @return
+	 */
+	@Modifying
+	@Transactional
+	@Query(nativeQuery = true,value = "delete from bed where bid = ?1")
+	int deleteByPrimaryKey(@Param("bid")Integer bid);
+	
+	/**
+	 * 新增床位信息
+	 * @param floor
+	 * @param room
+	 * @param bnum
+	 * @param aid
+	 * @return
+	 */
+	@Modifying
+	@Transactional
+	@Query(nativeQuery = true,value = "insert into bed(floor,room,bnum,aid) value(?1,?2,?3,?4)")
+	int insert(@Param("floor")Integer floor ,@Param("room")Integer room ,@Param("bnum")Integer bnum ,@Param("aid")Integer aid);
+	
+	/**
 	 * 查询所有客户信息
 	 */
-	@Query(nativeQuery = true,value = "select b.bid,b.floor,b.room,b.bnum,b.aid,c.aname from (bed b, client c) where b.aid = c.aid")
+	@Query(nativeQuery = true,value = "select b.bid,b.floor,b.room,b.bnum,b.aid,c.aname from (bed b, client c) where b.aid = c.aid order by bid")
 	List<Bed> findAll();
 	
 	/**
@@ -30,6 +55,7 @@ public interface BedRepository extends JpaRepository<Bed, Integer>{
 	 * @param bid
 	 * @return
 	 */
+	@Query(nativeQuery = true,value = "select b.bid,b.floor,b.room,b.bnum,b.aid,c.aname from (bed b, client c) where b.aid = c.aid and b.bid = ?1")
 	Bed findByBid(Integer bid);
 	
 	/**
@@ -52,4 +78,13 @@ public interface BedRepository extends JpaRepository<Bed, Integer>{
 	 * 根据客户编号查询床位信息 by马梦瑶
 	 */
 	Bed findByAid(Integer aid);
+	
+	/**
+	 * 根据客户编号查询床位信息
+	 * @param aid
+	 * @return
+	 */
+	@Transactional
+	@Query(nativeQuery = true,value = "select b.bid,b.floor,b.room,b.bnum,b.aid,c.aname from (bed b, client c) where b.aid = c.aid and b.aid = ?1")
+	Bed findByAid2(Integer aid);
 }

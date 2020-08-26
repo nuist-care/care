@@ -16,7 +16,7 @@ public interface BedService {
 	 * @param bed
 	 * @return
 	 */
-	Bed insert(Bed bed);
+	boolean insert(Integer floor,Integer room,Integer bnum,Integer aid);
 	
 	/**
 	 * 修改床位信息
@@ -31,7 +31,7 @@ public interface BedService {
 	 * @param bid
 	 * @return
 	 */
-	int delete(Integer bid);
+	boolean delete(Integer bid);
 	
 	/**
 	 * 根据床位编号查询床位信息

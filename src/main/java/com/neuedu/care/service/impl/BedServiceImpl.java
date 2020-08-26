@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.neuedu.care.dao.BedRepository;
+import com.neuedu.care.dao.ClientRepository;
 import com.neuedu.care.entity.Bed;
+import com.neuedu.care.entity.Client;
 import com.neuedu.care.service.BedService;
 
 /**
@@ -16,19 +18,45 @@ import com.neuedu.care.service.BedService;
  *
  */
 @Service
-@Transactional
 public class BedServiceImpl implements BedService{
 
 	@Autowired
 	private BedRepository bedRepository;
 	
+	@Autowired
+	private ClientRepository clientRepository;
+	
 	/**
 	 * 新增床位信息
 	 */
 	@Override
-	public Bed insert(Bed bed) {
-		Bed b = bedRepository.save(bed);
-		return b;
+	public boolean insert(Integer floor,Integer room,Integer bnum,Integer aid) {
+		System.out.println("新增床位");
+		//客户必须存在客户表中
+		Client client = clientRepository.findByAid(aid);
+		System.out.println(client);
+		if (null == client) {
+			return false;
+		}
+		//一个客户只能有一张床位
+		Bed b = bedRepository.findByAid2(aid);
+		if (null != b) {
+			return false;
+		}
+		//楼层号：1-6
+		if (floor <1 && floor > 6) {
+			return false;
+		}
+		//房间号：1-10
+		if (room < 1 && room > 10) {
+			return false;
+		}
+		//床位号：1-2
+		if (bnum < 1 && bnum > 2) {
+			return false;
+		}
+		int line = bedRepository.insert(floor, room, bnum, aid);
+		return line == 1 ? true : false;
 	}
 
 	/**
@@ -37,23 +65,33 @@ public class BedServiceImpl implements BedService{
 	@Override
 	public boolean update(Integer bid, Integer aid) {
 		System.out.println("修改床位");
+//		//客户必须存在客户表中
+//		Client client = clientRepository.findByAid(aid);
+//		System.out.println("修改床位1");
+//		System.out.println(client);
+//		System.out.println("修改床位2");
+//		if (client == null) {
+//			return false;
+//		}
+		//一个客户只能有一张床位
+		Bed b = bedRepository.findByAid2(aid);
+		if (null != b) {
+			return false;
+		}
 		int line = bedRepository.updateByBid(bid, aid);
-		return line == 1 ? true : false;
+		return line == 1 ? true :false;
 	}
 
 	/**
 	 * 删除床位信息
 	 */
 	@Override
-	public int delete(Integer bid) {
-		int line = 0;
-		try {
-			bedRepository.deleteById(bid);
-			line = 1; 
-		} catch (Exception e) {
-			line = 0;
+	public boolean delete(Integer bid) {
+		if (null == bid || bid <1) {
+			return false;
 		}
-		return line;
+		int line = bedRepository.deleteByPrimaryKey(bid);
+		return line == 1 ? true : false;
 	}
 
 	/**
