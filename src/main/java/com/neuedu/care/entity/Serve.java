@@ -34,8 +34,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "serve")
 @SecondaryTables({
 	@SecondaryTable(name = "employee"),
-	@SecondaryTable(name = "client"),
-	@SecondaryTable(name = "bed")
+	@SecondaryTable(name = "client")
 })
 @Data
 @Builder
@@ -70,8 +69,8 @@ public class Serve implements Serializable{
 	 * 员工姓名
 	 */
 	@ApiModelProperty(value = "员工姓名")
-	@NotBlank(message = "员工姓名不能为空！")
-	@Length(min = 2,message = "员工姓名不合法！")
+//	@NotBlank(message = "员工姓名不能为空！")
+//	@Length(min = 2,message = "员工姓名不合法！")
 	@Column(name = "ename", table = "employee")
 	private String ename;
 	
@@ -79,8 +78,8 @@ public class Serve implements Serializable{
 	 * 员工电话
 	 */
 	@ApiModelProperty(value = "员工电话")
-	@NotBlank(message = "员工电话不能为空！")
-	@Pattern(regexp = "^\\d{11}$",message = "电话不合法！请输入11位正确电话号码！")
+//	@NotBlank(message = "员工电话不能为空！")
+//	@Pattern(regexp = "^\\d{11}$",message = "电话不合法！请输入11位正确电话号码！")
 	@Column(name = "etelephone", table = "employee")
 	private String etelephone;
 	
@@ -88,8 +87,8 @@ public class Serve implements Serializable{
 	 * 员工职位
 	 */
 	@ApiModelProperty(value = "员工职位")
-	@NotBlank(message = "员工职位不能为空！")
-	@Length(min = 2,max = 2,message = "员工职位不合法！")
+//	@NotBlank(message = "员工职位不能为空！")
+//	@Length(min = 2,max = 2,message = "员工职位不合法！")
 	@Column(name = "position", table = "employee")
 	private String position;
 	
@@ -105,35 +104,8 @@ public class Serve implements Serializable{
 	 * 客户姓名
 	 */
 	@ApiModelProperty(value = "客户姓名")
-	@NotBlank(message = "客户姓名不能为空！")
-	@Length(min = 2,message = "客户姓名不合法！")
+//	@NotBlank(message = "客户姓名不能为空！")
+//	@Length(min = 2, message = "客户姓名不合法！")
 	@Column(name = "aname", table = "client")
 	private String aname;
-	
-	/**
-	 * 楼层
-	 */
-	@ApiModelProperty(value = "楼层")
-	@NotNull
-	@Range(min = 1,max = 3,message = "楼层不存在！请选择1~3范围内的楼层号！")
-	@Column(name = "floor", table = "bed")
-	private Integer floor;
-	
-	/**
-	 * 房间号
-	 */
-	@ApiModelProperty(value = "房间号")
-	@NotNull
-	@Range(min = 101,max = 399,message = "房间不存在！请输入101~399范围内的房间号！")
-	@Column(name = "room", table = "bed")
-	private Integer room;
-	
-	/**
-	 * 床号
-	 */
-	@ApiModelProperty(value = "床号")
-	@NotNull
-	@Range(min = 1,max = 6,message = "床号不存在！请输入1~6范围内的床号！")
-	@Column(name = "bnum", table = "bed")
-	private Integer bnum;
 }

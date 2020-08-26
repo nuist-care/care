@@ -18,7 +18,13 @@ import com.neuedu.care.entity.Bed;
  */
 @Repository
 public interface BedRepository extends JpaRepository<Bed, Integer>{
-
+	
+	/**
+	 * 查询所有客户信息
+	 */
+	@Query(nativeQuery = true,value = "select b.bid,b.floor,b.room,b.bnum,b.aid,c.aname from (bed b, client c) where b.aid = c.aid")
+	List<Bed> findAll();
+	
 	/**
 	 * 根据床位编号查询床位信息
 	 * @param bid
@@ -31,7 +37,7 @@ public interface BedRepository extends JpaRepository<Bed, Integer>{
 	 */
 	@Modifying
 	@Transactional
-	@Query(nativeQuery = true,value = "update bed set aid=?2 where bid=?1")
+	@Query(nativeQuery = true,value = "update bed set aid = ?2 where bid = ?1")
 	int updateByBid(@Param("bid")Integer bid,@Param("aid")Integer aid);
 
 	/**
@@ -39,6 +45,7 @@ public interface BedRepository extends JpaRepository<Bed, Integer>{
 	 */
 	@Modifying
 	@Transactional
+	@Query(nativeQuery = true,value = "select b.bid,b.floor,b.room,b.bnum,b.aid,c.aname from (bed b, client c) where b.aid = c.aid and b.floor=?1 and b.room=?2 and b.bnum=?3")
 	List<Bed> findByFloorAndRoomAndBnum(@Param("floor")Integer floor,@Param("room")Integer room,@Param("bnum")Integer bnum);
 
 	/**
