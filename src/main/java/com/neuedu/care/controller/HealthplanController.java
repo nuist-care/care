@@ -26,7 +26,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(tags = "健康计划控制器")
-@RestController(value = "healthplan")
+@RestController
 @RequestMapping(value = "healthplan")
 public class HealthplanController {
 	

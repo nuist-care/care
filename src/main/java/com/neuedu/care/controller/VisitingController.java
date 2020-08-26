@@ -36,7 +36,7 @@ import io.swagger.annotations.ApiResponse;
 
 @Api(tags = "就诊管理控制器")
 @RequestMapping(value = "visiting")
-@RestController(value = "visiting")
+@RestController
 public class VisitingController {
 	
 	@Autowired

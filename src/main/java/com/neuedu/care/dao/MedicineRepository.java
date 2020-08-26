@@ -42,16 +42,29 @@ public interface MedicineRepository extends JpaRepository<Medicine, Integer>{
 	int addMedicinerecord(@Param("aid")Integer aid,
 			@Param("mid")Integer mid);
 	
+//	/**
+//	 * 修改药嘱
+//	 */
+//	@Modifying
+//	@Transactional
+//	@Query(nativeQuery = true,value = "update medicine m,medicinerecord r "
+//			+ " set r.aid=?2,m.mname=?3,m.msize=?4,m.prescribedtime=?5"
+//			+ " where r.mid=m.mid and m.mid=?1")
+//	int updateMedicine(@Param("mid")Integer mid,
+//			@Param("aid")Integer aid,
+//			@Param("mname")String mname,
+//			@Param("msize")String msize,
+//			@Param("prescribedtime")String prescribedtime);
+	
 	/**
 	 * 修改药嘱
 	 */
 	@Modifying
 	@Transactional
-	@Query(nativeQuery = true,value = "update medicine m,medicinerecord r "
-			+ " set r.aid=?2,m.mname=?3,m.msize=?4,m.prescribedtime=?5"
-			+ " where r.mid=m.mid and m.mid=?1")
+	@Query(nativeQuery = true,value = "update medicine  "
+			+ " set mname=?2,msize=?3,prescribedtime=?4"
+			+ " where mid=?1")
 	int updateMedicine(@Param("mid")Integer mid,
-			@Param("aid")Integer aid,
 			@Param("mname")String mname,
 			@Param("msize")String msize,
 			@Param("prescribedtime")String prescribedtime);

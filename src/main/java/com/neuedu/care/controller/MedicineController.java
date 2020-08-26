@@ -27,7 +27,7 @@ import io.swagger.annotations.ApiOperation;
 
 
 @Api(tags = "医嘱控制器")
-@RestController(value = "medicine")
+@RestController
 @RequestMapping(value = "medicine")
 public class MedicineController {
 	@Autowired
@@ -100,6 +100,7 @@ public class MedicineController {
 	@ApiOperation(value = "修改医嘱")
 	@PutMapping(value = "/update/{mid}")
 	public ResultBean update(@PathVariable("mid") Integer mid, @Validated Medicine medicine, BindingResult bindingResult) {
+
 		ResultBean r = null;
 		if (bindingResult.hasErrors()) {
 			// 将无法通过数据校验的信息，合并成一个字符串，返回给前端
@@ -115,7 +116,7 @@ public class MedicineController {
 			r = new ResultBean(5000, false, "老人编号不存在!", null);
 			return r;
 		}
-		boolean flag = medicineService.updateMedicine(mid, medicine.getAid(), medicine.getMname(), medicine.getMsize(), medicine.getPrescribedtime());
+		boolean flag = medicineService.updateMedicine(mid, medicine.getMname(), medicine.getMsize(), medicine.getPrescribedtime());
 		if (flag) {
 			r = new ResultBean(200, true, "修改医嘱成功！", null);
 		} else {

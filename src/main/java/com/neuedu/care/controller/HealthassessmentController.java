@@ -25,7 +25,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 @Api(tags = "健康评估控制器")
 @RequestMapping(value = "healthassessment")
-@RestController(value = "healthassessment")
+@RestController
 public class HealthassessmentController {
 	
 	@Autowired

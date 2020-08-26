@@ -38,6 +38,6 @@ public interface MedicineService {
 	 * 修改医嘱
 	 * 
 	 */
-	boolean updateMedicine(Integer mid,Integer aid,String mname,String msize,String prescribedtime);
+	boolean updateMedicine(Integer mid,String mname,String msize,String prescribedtime);
 
 }

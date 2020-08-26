@@ -72,8 +72,8 @@ public class MedicineServiceImpl implements MedicineService{
 	 * 修改药嘱
 	 */
 	@Override
-	public boolean updateMedicine(Integer mid, Integer aid, String mname, String msize, String prescribedtime) {
-	    int line=medicineRepository.updateMedicine(mid, aid, mname, msize, prescribedtime);
+	public boolean updateMedicine(Integer mid, String mname, String msize, String prescribedtime) {
+	    int line=medicineRepository.updateMedicine(mid,  mname, msize, prescribedtime);
 	    return line==1?true:false;
 	}
 
