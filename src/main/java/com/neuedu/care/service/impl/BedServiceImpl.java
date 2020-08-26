@@ -35,8 +35,8 @@ public class BedServiceImpl implements BedService{
 	 * 修改床位信息
 	 */
 	@Override
-	public int update(Integer bid, Integer floor, Integer room, Integer bnum, Integer aid) {
-		int line = bedRepository.updateByBid(bid, floor, room, bnum, aid);
+	public int update(Integer bid, Integer aid) {
+		int line = bedRepository.updateByBid(bid, aid);
 		return line;
 	}
 
@@ -84,4 +84,12 @@ public class BedServiceImpl implements BedService{
 		return bedRepository.findByAid(aid);
 	}
 
+	/**
+	 * 根据楼层号，房间号，床位号查询床位信息
+	 */
+	@Override
+	public List<Bed> findByFloorAndRoomAndBnum(Integer floor, Integer room, Integer bnum) {
+		List<Bed> beds = bedRepository.findByFloorAndRoomAndBnum(floor, room, bnum);
+		return beds;
+	}
 }

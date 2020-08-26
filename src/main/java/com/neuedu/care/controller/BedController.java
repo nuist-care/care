@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
@@ -40,7 +39,6 @@ public class BedController {
 	 */
 	@ApiOperation(value = "显示所有床位信息页面")
 	@GetMapping(value = "/list")
-	@ResponseBody
 	public ResultBean list() {
 		List<Bed> beds = bedService.selectAll();
 		System.out.println("请求所有床位信息：" + beds);
@@ -55,7 +53,6 @@ public class BedController {
 	 * @return
 	 */
 	@PostMapping(value = "/insert")
-	@ResponseBody
     public ResultBean insert(@Validated Bed bed,BindingResult bindingResult){
   	ResultBean r = new ResultBean();
   	if (bindingResult.hasErrors()) {
@@ -82,7 +79,6 @@ public class BedController {
 	 */
 	@ApiOperation(value="根据编号查询床位信息")
     @GetMapping(value = "/{bid}")
-	@ResponseBody
     public ResultBean detail(@PathVariable("bid")Integer bid) {
 		Bed bed = bedService.selectByBid(bid);
 		ResultBean r = new ResultBean(200,true,"查询成功",bed);
@@ -96,9 +92,8 @@ public class BedController {
 	 * @param bindingResult
 	 * @return
 	 */
-	@PutMapping(value = "/update/{bid}")
-	@ResponseBody
-    public ResultBean update(@PathVariable("bid")Integer bid,@Validated Bed bed,BindingResult bindingResult){
+	@PutMapping(value = "/update/{bid}/{aid}")
+    public ResultBean update(@PathVariable("bid")Integer bid,@PathVariable("aid")Integer aid,@Validated Bed bed,BindingResult bindingResult){
   	ResultBean r = new ResultBean();
   	if (bindingResult.hasErrors()) {
   		StringBuffer msg = new StringBuffer();
@@ -108,8 +103,7 @@ public class BedController {
   		    r = new ResultBean(500,false,msg.toString(),null);
   		    return r;
 		}
-  	   int line = bedService.update(bed.getBid(),bed.getFloor(),
-  			   bed.getRoom(),bed.getBnum(),bed.getAid());
+  	   int line = bedService.update(bed.getBid(),bed.getAid());
 		if (line == 1) {
 			r = new ResultBean(200,true,"修改床位成功",null);
 		}else {
@@ -124,7 +118,6 @@ public class BedController {
 	 * @return
 	 */
 	@DeleteMapping(value = "/delete/{bid}")
-	@ResponseBody
     public ResultBean delete(@PathVariable("bid")Integer bid) {
    	int line = bedService.delete(bid);
    	ResultBean r = null;
@@ -135,4 +128,19 @@ public class BedController {
 		}
    	return r;
 	}
+	
+	/**
+	  * 根据楼层号，房间号，
+	  * @param pid
+	  * @param pauthor
+	  * @param ptype
+	  * @return
+	  */
+	 @ApiOperation(value="根据部门编号，作者，类型组合模糊查询")
+	 @GetMapping(value = "/find")
+	 public ResultBean find(Integer floor,Integer room,Integer bnum) {
+	 	List<Bed> beds = bedService.findByFloorAndRoomAndBnum(floor, room, bnum);
+	  	ResultBean r = new ResultBean(200, true, "组合模糊查询成功", beds);
+	   	return r;
+    }
 }

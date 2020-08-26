@@ -3,7 +3,6 @@ package com.neuedu.care.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
 import com.neuedu.care.entity.Client;
@@ -23,7 +22,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @Api(tags = "客户信息操作控制器")
-@Controller
+@RestController
 @RequestMapping(value = "client")
 public class ClientController {
 	@Autowired
@@ -33,8 +32,8 @@ public class ClientController {
 	 * 显示所有客户信息
 	 * @return
 	 */
+	@ApiOperation(value = "显示所有客户信息")
 	@GetMapping(value = "/list")
-	@ResponseBody
 	public ResultBean list() {
 		List<Client> clients= clientService.findAll();
 		ResultBean r = new ResultBean(200,true,"显示所有客户信息成功",clients);
@@ -50,7 +49,6 @@ public class ClientController {
 	 */
 	@ApiOperation(value = "多条件组合查询客户信息")
 	@GetMapping(value = "/find")
-	@ResponseBody
 	public ResultBean find(Integer aid,String aname,Integer clevel) {
 		if (aname == "") {
 			aname = "不存在";
@@ -67,7 +65,6 @@ public class ClientController {
 	 */
 	@ApiOperation(value = "删除一个员工信息")
 	@DeleteMapping(value = "/delete/{aid}")
-	@ResponseBody
 	public ResultBean delete(@PathVariable("aid")Integer aid) {
 		int line = clientService.delete(aid);
 		ResultBean r = null;
@@ -87,7 +84,6 @@ public class ClientController {
 	 */
 	@ApiOperation(value = "新增员工")
 	@PostMapping(value = "/insert")
-	@ResponseBody
 	public ResultBean insert(@Validated Client client,BindingResult bindingResult) {
 		ResultBean r = new ResultBean();
 		if (bindingResult.hasErrors()) {
@@ -114,7 +110,6 @@ public class ClientController {
 	 */
 	@ApiOperation(value = "显示一个员工信息界面")
 	@GetMapping(value = "/{aid}")
-	@ResponseBody
 	public ResultBean detail(@PathVariable("aid")Integer aid) {
 		Client client = clientService.findByid(aid);
 		ResultBean r = new ResultBean(200,true,"查询成功。。。",client);
@@ -130,13 +125,12 @@ public class ClientController {
 	 */
 	@ApiOperation(value = "更新一个员工信息")
 	@PutMapping(value = "/update/{aid}")
-	@ResponseBody
 	public ResultBean update(@PathVariable("aid")String aid,@Validated Client client,BindingResult bindingResult) {
 		ResultBean r = new ResultBean();
 		if (bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField()+": "+f.getDefaultMessage()+"\n");
+				msg.append(f.getDefaultMessage()+"\n");
 			}
 			r = new ResultBean(5004,false,msg.toString(),null);
 			return r;
