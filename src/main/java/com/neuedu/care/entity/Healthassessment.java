@@ -42,23 +42,20 @@ public class Healthassessment implements Serializable{
 	@ApiModelProperty(value = "评估编号")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@NotBlank
     @Column(name="assid",table = "healthassessment")	
 	private Integer assid;
 	
 	/** 
 	 * 病人编号 
 	 */
-//	@NotBlank
 	@ApiModelProperty(value = "病人编号")
 	@Column(name="aid",table = "healthassessment")	
-	@Range(min = 10000,message = "老人编号长度错误！")
+	@Range(min = 10000,message = "老人编号错误！")
 	private Integer aid;
 	
 	/**
 	 * 病人姓名
 	 */
-//	@NotBlank
 	@ApiModelProperty(value = "病人姓名")
 	@Column(name="aname",table = "client")
 	@Length(min = 1,message = "名字不合法")
@@ -66,7 +63,6 @@ public class Healthassessment implements Serializable{
 	
 	/**
 	 *  评估人 */
-//	@NotBlank
 	@ApiModelProperty(value = "评估人")
 	@Column(name="assesser",table = "healthassessment")
 	@Length(min = 1,message = "评估人不合法")
@@ -75,28 +71,24 @@ public class Healthassessment implements Serializable{
 
 	/**
 	 *  评估理由 */
-//	@NotBlank
 	@ApiModelProperty(value = "评估理由")
 	@Column(name="assreason",table = "healthassessment")
 	private String assreason;
 	
 	/**
 	 *  评估类型 */
-//	@NotBlank
 	@ApiModelProperty(value = "评估类型")
 	@Column(name="asstype",table = "healthassessment")
 	private String asstype;
 	
 	/** 
 	 * 评估时间 */
-	//@NotBlank
 	@ApiModelProperty(value = "评估时间")
 	@Column(name="asstime",table = "healthassessment")
 	private Date asstime;
 	
 	/**
 	 *  评估结果 */
-//	@NotBlank
 	@ApiModelProperty(value = "评估结果")
 	@Column(name="assresult",table = "healthassessment")
 	private String assresult;

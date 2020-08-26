@@ -15,7 +15,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
+import com.neuedu.care.entity.Client;
+import com.neuedu.care.entity.Employee;
 import com.neuedu.care.entity.Healthplan;
+import com.neuedu.care.service.ClientService;
+import com.neuedu.care.service.EmployeeService;
 import com.neuedu.care.service.HealthplanService;
 
 import io.swagger.annotations.Api;
@@ -28,6 +32,12 @@ public class HealthplanController {
 	
 	@Autowired
 	HealthplanService healthplanService;
+	
+	@Autowired
+	ClientService clientService;
+	
+	@Autowired
+	EmployeeService employeeService;
 	
 	/**
 	 * 显示所有健康信息*/
@@ -79,6 +89,17 @@ public class HealthplanController {
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
+		Client client=clientService.findByid(healthplan.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			return r;
+		}
+		Employee employee=employeeService.findByEid(healthplan.getEid());
+		if(employee==null) {
+			r = new ResultBean(5000, false, "医生编号不存在!", null);
+			return r;
+		}
+		
 		boolean flag=healthplanService.addHealthplan(healthplan.getAid(), healthplan.getEid(), healthplan.getPhycondition(), healthplan.getPlan(), healthplan.getRecoverydays());
 		if(flag) {
 			r=new ResultBean(200,true,"新增健康计划成功",null);
@@ -104,6 +125,17 @@ public class HealthplanController {
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
+		Client client=clientService.findByid(healthplan.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			return r;
+		}
+		Employee employee=employeeService.findByEid(healthplan.getEid());
+		if(employee==null) {
+			r = new ResultBean(5000, false, "医生编号不存在!", null);
+			return r;
+		}
+		
 		boolean flag = healthplanService.updateHealthplan(pid, healthplan.getAid(), healthplan.getEid(), healthplan.getPhycondition(), healthplan.getPlan(), healthplan.getRecoverydays());
 		if (flag) {
 			r = new ResultBean(200, true, "修改健康计划成功！", null);

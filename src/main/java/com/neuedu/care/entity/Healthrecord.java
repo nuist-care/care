@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -45,7 +47,7 @@ public class Healthrecord implements Serializable{
 	 * 老人编号
 	 **/
 	@ApiModelProperty(value = "老人编号")
-	@NotNull(message = "老人编号不能为空")
+	@Range(min = 10000,message = "老人编号错误！")
 	@Column(name = "aid", table = "healthrecord")
 	private Integer aid;
 	/**

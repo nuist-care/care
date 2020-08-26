@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
+import com.neuedu.care.entity.Client;
 import com.neuedu.care.entity.Healthassessment;
 import com.neuedu.care.entity.Visiting;
+import com.neuedu.care.service.ClientService;
 import com.neuedu.care.service.HealthassessmentService;
 
 import io.swagger.annotations.Api;
@@ -28,6 +30,9 @@ public class HealthassessmentController {
 	
 	@Autowired
 	HealthassessmentService healthassessmentService;
+	
+	@Autowired
+	ClientService clientService;
 	
 	/**
 	 * 显示所有评估信息*/
@@ -66,6 +71,11 @@ public class HealthassessmentController {
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		};
+		Client client=clientService.findByid(healthassessment.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			return r;
+		}
 		boolean flag=healthassessmentService.addHealthassessment(healthassessment.getAid(),
 				healthassessment.getAssesser(),healthassessment.getAssreason(),healthassessment.getAsstype(),
 				healthassessment.getAsstime(),healthassessment.getAssresult());
@@ -91,6 +101,11 @@ public class HealthassessmentController {
 				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
+			return r;
+		}
+		Client client=clientService.findByid(healthassessment.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
 			return r;
 		}
 		boolean flag = healthassessmentService.updateHealthassessment(assid, healthassessment.getAid(),

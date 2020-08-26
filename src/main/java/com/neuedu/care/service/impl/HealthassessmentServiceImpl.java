@@ -23,6 +23,7 @@ public class HealthassessmentServiceImpl implements HealthassessmentService{
 	@Override
 	public boolean addHealthassessment(Integer aid, String assesser, String assreason, String asstype, Date asstime,
 			String assresult) {
+		
 		int line=healthassessmentRepository.addHealthassessment(aid, assesser, assreason, asstype, asstime, assresult);
 		return line==1?true:false;
 	}
@@ -50,6 +51,7 @@ public class HealthassessmentServiceImpl implements HealthassessmentService{
 
 	@Override
 	public List<Healthassessment> findByAssidAidAname(Integer assid, Integer aid, String aname) {
+		//去除空字符串
 		if(assid!=null&&assid<1) {
 			assid=null;
 		}

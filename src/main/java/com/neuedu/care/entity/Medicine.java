@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -82,6 +83,7 @@ public class Medicine implements Serializable{
 	 */
 	@ApiModelProperty(value = "用药记录编号")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Range(min = 10000,message = "用药记录编号错误！")
 	@Column(name = "mrid", table = "medicinerecord")
 	private Integer mrid;
 	
@@ -89,6 +91,7 @@ public class Medicine implements Serializable{
 	 * 老人编号
 	 */
 	@ApiModelProperty(value = "老人编号")
+	@Range(min = 10000,message = "老人编号错误！")
 	@Column(name = "aid", table = "medicinerecord")
 	private Integer aid;
 	/**

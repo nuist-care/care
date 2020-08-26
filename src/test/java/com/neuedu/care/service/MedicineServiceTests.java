@@ -36,13 +36,13 @@ class MedicineServiceTests {
 	/**
 	 * 修改医嘱表
 	 */
-	@Test
-	public void test_updateHealthMedicine() {
-		System.out.println("测试修改：");
-		boolean s=medicineService.updateMedicine(70007, 10002,"头", "一天一次", "55天");
-		Assertions.assertNotEquals(0, s);
-		log.debug("测试通过！");
-	}
+//	@Test
+//	public void test_updateHealthMedicine() {
+//		System.out.println("测试修改：");
+//		boolean s=medicineService.updateMedicine(70007, 10002,"头", "一天一次", "5天");
+//		Assertions.assertNotEquals(0, s);
+//		log.debug("测试通过！");
+//	}
 	
 //	/**
 //	 * 根据药名和老人姓名模糊查询

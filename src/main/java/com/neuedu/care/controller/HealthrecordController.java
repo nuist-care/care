@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neuedu.care.bean.ResultBean;
+import com.neuedu.care.entity.Client;
 import com.neuedu.care.entity.Healthrecord;
+import com.neuedu.care.service.ClientService;
 import com.neuedu.care.service.HealthrecordService;
 
 import io.swagger.annotations.Api;
@@ -28,6 +30,9 @@ public class HealthrecordController {
 	
 	@Autowired
 	HealthrecordService healthrecordService;
+	
+	@Autowired
+	ClientService clientService;
 	
 	/**
 	 * 显示所有健康档案*/
@@ -79,6 +84,11 @@ public class HealthrecordController {
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
+		Client client=clientService.findByid(healthrecord.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			return r;
+		}
 		boolean flag=healthrecordService.addHealthrecord(healthrecord.getAid(), 
 				healthrecord.getBpressure(), healthrecord.getBfat(), 
 				healthrecord.getBsugar(), healthrecord.getHeartrate());
@@ -104,6 +114,11 @@ public class HealthrecordController {
 				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
+			return r;
+		}
+		Client client=clientService.findByid(healthrecord.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
 			return r;
 		}
 		boolean flag = healthrecordService.updateHealthrecord(rid, healthrecord.getAid(), 

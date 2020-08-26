@@ -22,6 +22,7 @@ import com.neuedu.care.bean.ResultBean;
 import com.neuedu.care.dao.VistingRepository;
 import com.neuedu.care.entity.Client;
 import com.neuedu.care.entity.Visiting;
+import com.neuedu.care.service.ClientService;
 import com.neuedu.care.service.VisitingService;
 
 import io.swagger.annotations.Api;
@@ -40,6 +41,9 @@ public class VisitingController {
 	
 	@Autowired
 	VisitingService visitingService;
+	
+	@Autowired
+	ClientService clientService;
 	
 	/**
 	 * 显示所有就诊信息*/
@@ -67,6 +71,12 @@ public class VisitingController {
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
+		Client client=clientService.findByid(visiting.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			return r;
+		}
+		
 		boolean flag=visitingService.addVisiting(visiting.getAid(),visiting.getVhospital(),visiting.getVtime(),visiting.getVroom(),visiting.getVresult());
 		if(flag) {
 			r=new ResultBean(200,true,"新增就诊信息成功",null);
@@ -90,6 +100,11 @@ public class VisitingController {
 				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
+			return r;
+		}
+		Client client=clientService.findByid(visiting.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
 			return r;
 		}
 		boolean flag = visitingService.updateVisiting(vid, visiting.getAid(), visiting.getVhospital(), visiting.getVtime(), visiting.getVroom(), visiting.getVresult());

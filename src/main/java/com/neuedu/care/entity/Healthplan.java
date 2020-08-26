@@ -14,6 +14,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -45,21 +46,23 @@ public class Healthplan implements Serializable{/**
 	
 	@ApiModelProperty(value = "老人编号")
 	@NotNull
+	@Range(min = 10000,message = "老人编号错误！")
 	@Column(name = "aid", table = "healthplan")
 	private Integer aid;
 	
 	@ApiModelProperty(value = "医生编号")
 	@NotNull
+	@Range(min = 10000,message = "医生编号错误！")
 	@Column(name = "eid", table = "healthplan")
 	private Integer eid;
 	
 	@ApiModelProperty(value = "老人姓名")
-//	@NotBlank(message = "客户姓名不能为空！")
+	@Length(min = 1,message = "老人名字不合法")
 	@Column(name = "aname", table = "client")
 	private String aname;
 	
 	@ApiModelProperty(value = "医生姓名")
-//	@NotBlank(message = "医生姓名不能为空！")
+	@Length(min = 1,message = "医生姓名不合法")
 	@Column(name = "ename", table = "employee")
 	private String ename;
 	

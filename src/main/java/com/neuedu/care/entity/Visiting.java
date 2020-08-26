@@ -45,7 +45,6 @@ public class Visiting implements Serializable {
 	@ApiModelProperty(value = "就诊编号")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@NotBlank
     @Column(name="vid",table = "visiting")	
 	private Integer vid;
 	
@@ -53,24 +52,21 @@ public class Visiting implements Serializable {
 	 * 病人编号 
 	 */
 	@ApiModelProperty(value = "病人编号 ")
-//	@NotBlank
 	@Column(name="aid",table = "visiting")	
-	@Range(min = 10000,message = "老人编号长度错误！")
+	@Range(min = 10000,message = "老人编号错误！")
 	private Integer aid;
 	
 	/**
 	 * 病人姓名
 	 */
 	@ApiModelProperty(value = "病人姓名")
-//	@NotBlank
 	@Column(name="aname",table = "client")
-	@Length(min = 1,message = "名字不合法")
+	@Length(min = 1,message = "老人名字不合法")
 	private String aname;
 	
 	/**
 	 *  就诊医院 */
 	@ApiModelProperty(value = "就诊医院")
-//	@NotBlank
 	@Column(name="vhospital",table = "visiting")
 	@Length(min = 1,message = "医院信息不合法")
 	private String vhospital;
@@ -78,22 +74,19 @@ public class Visiting implements Serializable {
 	/** 
 	 * 就诊时间 */
 	@ApiModelProperty(value = "就诊时间")
-	//@NotBlank
 	@Column(name="vtime",table = "visiting")
 	private Date vtime;
 	
 	/**
 	 *  就诊室 */
 	@ApiModelProperty(value = "就诊室")
-//	@NotBlank
 	@Column(name="vroom",table = "visiting")
-	@Length(min = 1,max=3,message = "楼层不合法")
+	@Length(min = 1,max=3,message = "就诊室不合法")
 	private String vroom;
 	
 	/**
 	 *  就诊结果 */
 	@ApiModelProperty(value = "就诊结果")
-//	@NotBlank
 	@Column(name="vresult",table = "visiting")
 	private String vresult;
 	
