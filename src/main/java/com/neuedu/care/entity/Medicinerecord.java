@@ -92,4 +92,15 @@ public class Medicinerecord implements Serializable{
 	@NotBlank(message = "实际用药时间不得为空！")
 	@Column(name = "actualtime", table = "medicinerecord")
 	private String actualtime;
+	
+	/**
+	 * 医嘱编号
+	 */
+	@ApiModelProperty(value = "医嘱编号")
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "mid", table = "medicine")
+	private Integer mid;
+	
+	
 }

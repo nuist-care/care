@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "jpa.show-sql",
+    "type": "java.lang.String",
+    "description": "A description for 'jpa.show-sql'"
+  },
+  {
+    "name": "jpa.hibernate.ddl-auto",
+    "type": "java.lang.String",
+    "description": "A description for 'jpa.hibernate.ddl-auto'"
+  },
+  {
+    "name": "jpa.open-in-view",
+    "type": "java.lang.String",
+    "description": "A description for 'jpa.open-in-view'"
+  },
+  {
+    "name": "swagger.enable",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.enable'"
+  },
+  {
+    "name": "swagger.title",
+    "type": "java.lang.String",
+    "description": "A description for 'swagger.title'"
+  },
+  {
+    "name": "jwt.clientid",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.clientid'"
+  },
+  {
+    "name": "jwt.base64Secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.base64Secret'"
+  },
+  {
+    "name": "jwt.name",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.name'"
+  },
+  {
+    "name": "jwt.expiresSecond",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expiresSecond'"
+  }
+]}
