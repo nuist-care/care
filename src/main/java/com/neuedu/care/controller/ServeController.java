@@ -87,7 +87,7 @@ public class ServeController {
 
 	/**
 	 * 新增服务对象信息
-	 * @param serve         服务对象信息对象
+	 * @param serve  服务对象信息对象
 	 * @return 返回JSON数据
 	 */
 	@ApiOperation(value = "新增服务对象信息")

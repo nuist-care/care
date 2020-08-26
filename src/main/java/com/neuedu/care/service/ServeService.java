@@ -38,7 +38,7 @@ public interface ServeService {
 	List<Serve> selectAll();
 	
 	/**
-	 * 根据员工姓名和客户姓名进行多条件模糊查询
+	 * 根据员工姓名、客户姓名进行多条件模糊查询
 	 * @param ename 员工姓名
 	 * @param aname 客户姓名
 	 * @return 服务信息对象集合

@@ -105,7 +105,7 @@ public class Serve implements Serializable{
 	 */
 	@ApiModelProperty(value = "客户姓名")
 //	@NotBlank(message = "客户姓名不能为空！")
-//	@Length(min = 2,message = "客户姓名不合法！")
+//	@Length(min = 2, message = "客户姓名不合法！")
 	@Column(name = "aname", table = "client")
 	private String aname;
 }

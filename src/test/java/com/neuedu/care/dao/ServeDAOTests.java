@@ -73,7 +73,7 @@ public class ServeDAOTests {
 //	}
 //	
 //	/**
-//	 * 根据员工姓名和客户姓名进行多条件模糊查询
+//	 * 根据员工姓名、客户姓名进行多条件模糊查询
 //	 */
 //	@Test
 //	public void test_findByEnameContainingAndAnameContaining() {
