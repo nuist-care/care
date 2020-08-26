@@ -22,8 +22,10 @@ import com.neuedu.care.bean.ResultBean;
 import com.neuedu.care.dao.VistingRepository;
 import com.neuedu.care.entity.Client;
 import com.neuedu.care.entity.Visiting;
+import com.neuedu.care.service.ClientService;
 import com.neuedu.care.service.VisitingService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -32,29 +34,32 @@ import io.swagger.annotations.ApiResponse;
 
 
 
-
+@Api(tags = "就诊管理控制器")
 @RequestMapping(value = "visiting")
-@RestController(value = "visiting")
+@RestController
 public class VisitingController {
-	@Autowired
-	VistingRepository vistingRepository;
 	
 	@Autowired
 	VisitingService visitingService;
 	
+	@Autowired
+	ClientService clientService;
+	
 	/**
 	 * 显示所有就诊信息*/
+	@ApiOperation(value = "显示所有就诊信息")
 	@GetMapping(value = "/visitinglist")
-	@ResponseBody
 	public ResultBean list() {
-		List<Visiting> visitings=vistingRepository.findAllVisiting();
+		List<Visiting> visitings=visitingService.findAllVisiting();
 		System.out.println("请求所有部门信息为："+visitings);
 		ResultBean r=new ResultBean(200, true, "查询所有信息成功", visitings);
 		return r;
 	}
-	/**
-	 * 增加就诊信息*/
 	
+	/**
+	 * 增加就诊信息
+	 * */
+	@ApiOperation(value = "增加就诊信息")
 	@PostMapping(value = "/insert")
 	public ResultBean insert(@Validated Visiting visiting,BindingResult bindingResult)  { 
 		ResultBean r=null;
@@ -66,10 +71,15 @@ public class VisitingController {
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
-		Integer vid=null;
+		Client client=clientService.findByid(visiting.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			return r;
+		}
+		
 		boolean flag=visitingService.addVisiting(visiting.getAid(),visiting.getVhospital(),visiting.getVtime(),visiting.getVroom(),visiting.getVresult());
 		if(flag) {
-			r=new ResultBean(200,true,"新增就诊信息成功\n新增就诊信息编号为："+visiting.getVid(),null);
+			r=new ResultBean(200,true,"新增就诊信息成功",null);
 		}else {
 			r=new ResultBean(5005, false, "新增就诊信息失败", null);
 		}
@@ -79,9 +89,9 @@ public class VisitingController {
 	/**
 	 * 修改就诊信息
 	 */
-	@ApiOperation(value = "修改值班信息")
+	@ApiOperation(value = "修改就诊信息")
 	@PutMapping(value = "/update/{vid}")
-	public ResultBean update(@PathVariable("vid") Integer vid, @Validated Visiting visiting, @Validated Client client,BindingResult bindingResult) {
+	public ResultBean update(@PathVariable("vid") Integer vid, @Validated Visiting visiting, BindingResult bindingResult) {
 		ResultBean r = null;
 		if (bindingResult.hasErrors()) {
 			// 将无法通过数据校验的信息，合并成一个字符串，返回给前端
@@ -92,7 +102,12 @@ public class VisitingController {
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
-		boolean flag = visitingService.updateVisiting(vid, visiting.getAid(), client.getAname(), visiting.getVhospital(), visiting.getVtime(), visiting.getVroom(), visiting.getVresult());
+		Client client=clientService.findByid(visiting.getAid());
+		if(client==null) {
+			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			return r;
+		}
+		boolean flag = visitingService.updateVisiting(vid, visiting.getAid(), visiting.getVhospital(), visiting.getVtime(), visiting.getVroom(), visiting.getVresult());
 		if (flag) {
 			r = new ResultBean(200, true, "修改就诊信息成功！", null);
 		} else {
@@ -104,24 +119,20 @@ public class VisitingController {
 	/**
 	 * 模糊查询
 	 */
-	
+	@ApiOperation(value = "根据信息模糊查询就诊信息")
 	@GetMapping(value = "/find")
-    @ResponseBody
 	public ResultBean find(Integer vid,Integer aid,String aname) {
-		List<Visiting> visitings = vistingRepository.findByVidAidAname(vid,aid,aname);
+		List<Visiting> visitings = visitingService.findByVidAidAname(vid,aid,aname);
 		System.out.println("请求所有部门信息为："+visitings);
 		ResultBean r=new ResultBean(200,true,"组合模糊查询成功",visitings);
 		return r;
 	}
-	/**
-	 * 修改
-	 */
 
-//	@ApiOperation(value = "根据就诊编号查询就诊信息")
-//	@ApiImplicitParam(paramType = "path", name = "vid", value = "值班编号", required = true, dataType = "int")
-//	@ApiResponse(code = 200, message = "返回duty_update.html页面，数据存储在care中")
+	/**
+	 * 根据编号查询
+	 */
+	@ApiOperation(value = "根据就诊编号查询就诊信息")
 	@GetMapping(value = "/{vid}")
-	@ResponseBody
 	public ResultBean findByVid(@PathVariable("vid") Integer vid) {
 		Visiting visiting=visitingService.findByVid(vid);
 		ResultBean r = new ResultBean(200, true, "查询成功！", visiting);

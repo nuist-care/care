@@ -16,6 +16,9 @@ public class VisitingServiceImpl implements VisitingService{
 	@Autowired
 	public VistingRepository vistingRepository;
 
+	/**
+	 * 模糊查询就诊记录
+	 **/
 	@Override
 	public List<Visiting> findByVidAidAname(Integer vid, Integer aid, String aname) {
 		//业务逻辑判断
@@ -32,15 +35,21 @@ public class VisitingServiceImpl implements VisitingService{
 		return vistingRepository.findByVidAidAname(vid, aid, aname); 
 	}
 
+	/**
+	 * 修改就诊记录
+	 **/
 	@Override
-	public boolean updateVisiting(Integer vid, Integer aid, String aname, String vhospital, Date vtime, String vroom,
+	public boolean updateVisiting(Integer vid, Integer aid, String vhospital, Date vtime, String vroom,
 			String vresult) {
-		int line=vistingRepository.updateVisiting(vid, aid, aname, vhospital, vtime, vroom, vresult);
+		int line=vistingRepository.updateVisiting(vid, aid, vhospital, vtime, vroom, vresult);
 		return line==1?true:false;
 	}
 
 
 
+	/**
+	 * 添加就诊记录
+	 **/
 	@Override
 	public boolean addVisiting(Integer aid, String vhospital, Date vtime, String vroom, String vresult) {
 		int line=vistingRepository.addVisiting(aid, vhospital, vtime, vroom, vresult);
@@ -50,11 +59,18 @@ public class VisitingServiceImpl implements VisitingService{
 	}
 
 
+	/**
+	 * 查询所有就诊记录
+	 **/
 
 	@Override
 	public List<Visiting> findAllVisiting() {
 		return vistingRepository.findAllVisiting();
 	}
+	
+	/**
+	 * 根据编号查询
+	 **/
 
 	@Override
 	public Visiting findByVid(Integer vid) {

@@ -76,7 +76,7 @@ public class ServeServiceTests {
 	}
 	
 	/**
-	 * 根据员工姓名和客户姓名进行多条件模糊查询
+	 * 根据员工姓名、客户姓名进行多条件模糊查询
 	 */
 	@Test
 	void test_findByEnameContainingAndAnameContaining() {

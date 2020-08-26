@@ -36,16 +36,16 @@ public class BedDaoTests {
 //	}
 	
 	/**
-	 * 对findAll()函数进行测试
+	 * 对findAllBeds()函数进行测试
 	 */
 //	@Test
-//	void test_findAll() {
+//	void test_findAllBeds() {
 //		List<Bed> beds = bedRepository.findAll();
-//		for(Bed bed : beds) {
-//			log.info(beds.toString());
-//		}
+//		Assertions.assertNotEquals(0, beds.size());
+//		System.out.println(beds);
+//		log.debug("测试通过");
 //	}
-	
+//	
 	/**
 	 * 对save()函数进行测试
 	 * @throws ParseException
@@ -81,16 +81,13 @@ public class BedDaoTests {
 	 * 对updateByBid()函数进行测试
 	 * @throws ParseException
 	 */
-//	@Test
-//	void test_updateBid() throws ParseException{
-//		Integer bid = 1;
-//		Integer floor = 1;
-//		Integer room = 1;
-//		Integer bnum = 1;
-//		Integer aid = 2;
-//		int line = bedRepository.updateByBid(bid, floor, room, bnum, aid);
-//		log.info(line + "更新成功");
-//	}
+	@Test
+	void test_updateBid() throws ParseException{
+		Integer bid = 1;
+		Integer aid = 2;
+		int line = bedRepository.updateByBid(bid,aid);
+		log.info(line + "更新成功");
+	}
 	
 	/**
 	 * 对findByFloorAndRoomAndBnum()方法进行测试
@@ -109,10 +106,10 @@ public class BedDaoTests {
 	/**
 	 * 对findByAid()方法进行测试
 	 */
-	public void test_findByAid() {
-		Integer aid = new Integer(1);
-		Bed bed = bedRepository.findByAid(aid);
-		Assertions.assertEquals(aid.intValue(),bed.getAid().intValue());
-		log.debug("测试通过");
-	}
+//	public void test_findByAid() {
+//		Integer aid = new Integer(1);
+//		Bed bed = bedRepository.findByAid(aid);
+//		Assertions.assertEquals(aid.intValue(),bed.getAid().intValue());
+//		log.debug("测试通过");
+//	}
 }
