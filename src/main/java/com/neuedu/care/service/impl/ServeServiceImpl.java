@@ -98,11 +98,14 @@ public class ServeServiceImpl implements ServeService {
 
 	@Override
 	public Serve findByEidAndAid(Integer eid, Integer aid) {
+//		System.out.println("在serveServiceImpl中：eid:" + eid + ",aid:" + aid);
 		// 非空属性判断
 		if (null == eid || null == aid) {
 			return null;
 		}
-		return serveRepository.findByEidAndAid(eid, aid);
+		Serve serve = serveRepository.findByEidAndAid(eid, aid);
+		System.out.println("在serveServiceImpl中：返回serve对象：" + serve);
+		return serve;
 	}
 
 }
