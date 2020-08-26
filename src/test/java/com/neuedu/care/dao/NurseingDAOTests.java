@@ -52,26 +52,26 @@ public class NurseingDAOTests {
 	/**
 	 * 根据客户姓名进行模糊查询
 	 */
-	@Test
-	void test_findByAnameContaining() {
-		System.out.println("测试开始，根据客户姓名进行模糊查询：");
-		List<Nurseing> nurseings = nurseingRepository.findByAnameContaining("王");
-		Assertions.assertNotEquals(0, nurseings.size());
-		System.out.println(nurseings);
-		log.debug("测试通过！");
-	}
-	
-//	/**
-//	 * 查询所有护理记录信息
-//	 */
 //	@Test
-//	void test_findAll() {
-//		System.out.println("测试开始，查询所有护理记录信息：");
-//		List<Nurseing> nurseings = nurseingRepository.findAll();
+//	void test_findByAnameContaining() {
+//		System.out.println("测试开始，根据客户姓名进行模糊查询：");
+//		List<Nurseing> nurseings = nurseingRepository.findByAnameContaining("王");
 //		Assertions.assertNotEquals(0, nurseings.size());
 //		System.out.println(nurseings);
 //		log.debug("测试通过！");
 //	}
+	
+//	/**
+//	 * 查询所有护理记录信息
+//	 */
+	@Test
+	void test_findAll() {
+		System.out.println("测试开始，查询所有护理记录信息：");
+		List<Nurseing> nurseings = nurseingRepository.findAll();
+		Assertions.assertNotEquals(0, nurseings.size());
+		System.out.println(nurseings);
+		log.debug("测试通过！");
+	}
 //	
 //	/**
 //	 * 根据护理记录编号查询护理记录信息

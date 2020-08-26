@@ -21,13 +21,10 @@ public interface BedService {
 	/**
 	 * 修改床位信息
 	 * @param bid
-	 * @param floor
-	 * @param room
-	 * @param bnum
 	 * @param aid
 	 * @return
 	 */
-	int update(Integer bid,Integer aid);
+	boolean update(Integer bid,Integer aid);
 	
 	/**
 	 * 根据床位编号删除床位信息

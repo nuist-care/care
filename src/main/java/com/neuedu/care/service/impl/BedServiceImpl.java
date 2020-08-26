@@ -35,9 +35,10 @@ public class BedServiceImpl implements BedService{
 	 * 修改床位信息
 	 */
 	@Override
-	public int update(Integer bid, Integer aid) {
+	public boolean update(Integer bid, Integer aid) {
+		System.out.println("修改床位");
 		int line = bedRepository.updateByBid(bid, aid);
-		return line;
+		return line == 1 ? true : false;
 	}
 
 	/**
@@ -69,8 +70,8 @@ public class BedServiceImpl implements BedService{
 	 */
 	@Override
 	public List<Bed> selectAll() {
-		List<Bed> beds = bedRepository.findAll();
-		return beds;
+		System.out.println("查询所有");
+		return bedRepository.findAll();
 	}
 
 	/**

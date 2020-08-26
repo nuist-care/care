@@ -46,31 +46,31 @@ public class BedController {
 		return r;
 	}
 	
-	/**
-	 * 新增床位
-	 * @param bed
-	 * @param bindingResult
-	 * @return
-	 */
-	@PostMapping(value = "/insert")
-    public ResultBean insert(@Validated Bed bed,BindingResult bindingResult){
-  	ResultBean r = new ResultBean();
-  	if (bindingResult.hasErrors()) {
-  		StringBuffer msg = new StringBuffer();
-  		for (FieldError f:bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
-			}
-  		    r = new ResultBean(500,false,msg.toString(),null);
-  		    return r;
-		}
-     	Bed b= bedService.insert(bed);
-		if (b != null) {
-			r = new ResultBean(200,true,"新增床位成功~~\n新增床位编号为" + bed.getBid() ,null);
-		}else {
-			r = new ResultBean(500,false,"新增床位失败",null);
-		}
-  	return r;
-	}
+//	/**
+//	 * 新增床位
+//	 * @param bed
+//	 * @param bindingResult
+//	 * @return
+//	 */
+//	@PostMapping(value = "/insert")
+//    public ResultBean insert(@Validated Bed bed,BindingResult bindingResult){
+//  	ResultBean r = new ResultBean();
+//  	if (bindingResult.hasErrors()) {
+//  		StringBuffer msg = new StringBuffer();
+//  		for (FieldError f:bindingResult.getFieldErrors()) {
+//				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
+//			}
+//  		    r = new ResultBean(500,false,msg.toString(),null);
+//  		    return r;
+//		}
+//     	Bed b= bedService.insert(bed);
+//		if (b != null) {
+//			r = new ResultBean(200,true,"新增床位成功~~\n新增床位编号为" + bed.getBid() ,null);
+//		}else {
+//			r = new ResultBean(500,false,"新增床位失败",null);
+//		}
+//  	return r;
+//	}
 	
 	/**
 	 * 根据编号查询床位信息
@@ -88,23 +88,14 @@ public class BedController {
 	/**
 	 * 修改床位信息
 	 * @param bid
-	 * @param bed
-	 * @param bindingResult
+	 * @param aid
 	 * @return
 	 */
 	@PutMapping(value = "/update/{bid}/{aid}")
-    public ResultBean update(@PathVariable("bid")Integer bid,@PathVariable("aid")Integer aid,@Validated Bed bed,BindingResult bindingResult){
-  	ResultBean r = new ResultBean();
-  	if (bindingResult.hasErrors()) {
-  		StringBuffer msg = new StringBuffer();
-  		for (FieldError f:bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
-			}
-  		    r = new ResultBean(500,false,msg.toString(),null);
-  		    return r;
-		}
-  	   int line = bedService.update(bed.getBid(),bed.getAid());
-		if (line == 1) {
+    public ResultBean update(@PathVariable("bid")Integer bid,@PathVariable("aid")Integer aid){
+  	    ResultBean r = null;
+  	    boolean flag = bedService.update(bid, aid);
+	    if (flag) {
 			r = new ResultBean(200,true,"修改床位成功",null);
 		}else {
 			r = new ResultBean(500,false,"修改床位失败",null);
@@ -112,22 +103,22 @@ public class BedController {
   	return r;
 	}
 	
-	/**
-	 * 删除床位信息
-	 * @param bid
-	 * @return
-	 */
-	@DeleteMapping(value = "/delete/{bid}")
-    public ResultBean delete(@PathVariable("bid")Integer bid) {
-   	int line = bedService.delete(bid);
-   	ResultBean r = null;
-   	if (line == 1) {
-			r = new ResultBean(200,true,"删除床位成功",null);
-		}else {
-			r = new ResultBean(500,false,"删除床位失败",null);
-		}
-   	return r;
-	}
+//	/**
+//	 * 删除床位信息
+//	 * @param bid
+//	 * @return
+//	 */
+//	@DeleteMapping(value = "/delete/{bid}")
+//    public ResultBean delete(@PathVariable("bid")Integer bid) {
+//   	int line = bedService.delete(bid);
+//   	ResultBean r = null;
+//   	if (line == 1) {
+//			r = new ResultBean(200,true,"删除床位成功",null);
+//		}else {
+//			r = new ResultBean(500,false,"删除床位失败",null);
+//		}
+//   	return r;
+//	}
 	
 	/**
 	  * 根据楼层号，房间号，

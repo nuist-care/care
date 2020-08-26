@@ -46,7 +46,7 @@ public class BedServiceTests {
 //			log.info(bed.toString());
 //		}
 //	}
-	
+//	
 	/**
 	 * 对findByFloorAndRoomAndBnum()方法进行测试
 	 */
@@ -98,10 +98,10 @@ public class BedServiceTests {
 	/**
 	 * 对findByAid()方法进行测试
 	 */
-	@Test
-	void test_findByAid() {
-		Integer aid = new Integer(1);
-		Bed bed = bedService.findByAid(aid);
-		assertEquals(aid.intValue(),bed.getAid().intValue());
-	}
+//	@Test
+//	void test_findByAid() {
+//		Integer aid = new Integer(1);
+//		Bed bed = bedService.findByAid(aid);
+//		assertEquals(aid.intValue(),bed.getAid().intValue());
+//	}
 }
