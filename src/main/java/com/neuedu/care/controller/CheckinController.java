@@ -61,7 +61,7 @@ public class CheckinController {
 	@GetMapping(value = "/find")
 	public ResultBean find(Integer iid,Integer aid,String aname) {
 		boolean falg = false;
-		if (aname == null) {
+		if (aname == "") {
 			aname = "不存在";
 			falg = true;
 		}
