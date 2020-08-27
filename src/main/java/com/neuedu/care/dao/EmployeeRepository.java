@@ -63,7 +63,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	 * @return
 	 */
 	@Query(nativeQuery = true, value = "select * from employee where position = '护工' or position = '医生'")
-	List<Employee> findAllByPosition();
+	Page<Employee> findAllByPosition(Pageable pageable);
 	
 	/**
 	 * 更新员工信息
