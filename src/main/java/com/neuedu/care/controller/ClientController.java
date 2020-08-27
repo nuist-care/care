@@ -61,8 +61,13 @@ public class ClientController {
 	@ApiOperation(value = "多条件组合查询客户信息")
 	@GetMapping(value = "/find")
 	public ResultBean find(Integer aid,String aname,Integer clevel) {
+		boolean falg = false;
 		if (aname == "") {
 			aname = "不存在";
+			falg = true;
+		}
+		if (aid == null && clevel == null && falg) {
+			aname = "";
 		}
 		List<Client> clients= clientService.findByCondition(aid, aname, clevel);
 		ResultBean r = new ResultBean(200,true,"查询所有客户信息成功",clients);
