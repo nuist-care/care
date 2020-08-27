@@ -45,7 +45,7 @@ public interface EmployeeService {
 	List<Employee> findCondition(Integer eid,String ename,String position);
 	
 	/**
-	 * 查询所有医生和护工的信息 by马梦瑶
+	 * 查询所有医生和护工的信息  by马梦瑶
 	 * @return
 	 */
 	Page<Employee> findAllByPosition(Pageable pageable);

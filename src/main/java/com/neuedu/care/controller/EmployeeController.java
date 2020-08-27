@@ -61,13 +61,8 @@ public class EmployeeController {
 	@ApiOperation(value = "多条件组合查询员工")
 	@GetMapping(value = "/find")
 	public ResultBean find(Integer eid,String ename,String position) {
-		boolean flag = false;
 		if (ename == "") {
 			ename = "不存在";
-			flag = true;
-		}
-		if (eid == null && position == "" &&flag) {
-			ename = "";
 		}
 		List<Employee> employees = employeeService.findCondition(eid, ename, position);
 		ResultBean r = new ResultBean(200,true,"查询所有员工信息成功",employees);
@@ -163,7 +158,7 @@ public class EmployeeController {
 	}
 	
 	/**
-	 * 显示所有医生和护工信息 by马梦瑶
+	 * 显示所有医生和护工信息  by马梦瑶
 	 * @return 返回JSON数据
 	 */
 	@ApiOperation(value = "显示所有医生和护工信息页面：数据存储在care中")
