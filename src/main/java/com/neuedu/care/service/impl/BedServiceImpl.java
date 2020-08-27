@@ -65,14 +65,14 @@ public class BedServiceImpl implements BedService{
 	@Override
 	public boolean update(Integer bid, Integer aid) {
 		System.out.println("修改床位");
-//		//客户必须存在客户表中
-//		Client client = clientRepository.findByAid(aid);
-//		System.out.println("修改床位1");
-//		System.out.println(client);
-//		System.out.println("修改床位2");
-//		if (client == null) {
-//			return false;
-//		}
+		//客户必须存在客户表中
+		String n = clientRepository.findByAid2(aid);
+		System.out.println("修改床位1");
+		System.out.println(n);
+		System.out.println("修改床位2");
+		if (n == null) {
+			return false;
+		}
 		//一个客户只能有一张床位
 		Bed b = bedRepository.findByAid2(aid);
 		if (null != b) {
