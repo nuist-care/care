@@ -42,7 +42,7 @@ public interface MedicinerecordRepository extends JpaRepository<Medicinerecord, 
 	/**
 	 * 根据用药记录编号查询用药记录信息
 	 */
-	@Query(nativeQuery = true, value = "select medicinerecord.mrid,medicine.mname,client.aname,medicine.prescribedtime,medicine.msize,medicinerecord.actualtime FROM medicinerecord,medicine,client WHERE medicinerecord.aid = client.aid AND medicinerecord.mid = medicine.mid AND medicinerecord.mrid = ?1")
+	@Query(nativeQuery = true, value = "select medicinerecord.mrid,medicine.mname,client.aname,medicine.prescribedtime,medicine.msize,medicinerecord.actualtime,medicine.mid FROM medicinerecord,medicine,client WHERE medicinerecord.aid = client.aid AND medicinerecord.mid = medicine.mid AND medicinerecord.mrid = ?1")
 	Medicinerecord findByMrid(Integer mrid);
 	
 	
