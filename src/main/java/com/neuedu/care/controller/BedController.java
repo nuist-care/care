@@ -40,7 +40,7 @@ public class BedController {
 	@Autowired
 	private BedRepository bedRepository;
 	@Autowired
-	private ClientService clientService;
+	private ClientRepository clientRepository;
 	
 	/**
 	 * 显示所有床位信息页面
@@ -124,12 +124,12 @@ public class BedController {
     public ResultBean update(@PathVariable("bid")Integer bid,@PathVariable("aid")Integer aid){
   	    ResultBean r = null;
   	    System.out.println("判断开始");
-  	    //客户必须存在客户表中
-  	    Client client = clientService.findByid(aid);
-	 	System.out.println("1:" + client);
-		if (null != client) {
-			return r = new ResultBean(5005,false,"客户不存在",null);
-		}
+//  	    //客户必须存在客户表中
+//  	    Client client = clientRepository.findByAid(aid);
+//	 	System.out.println("1:" + client);
+//		if (null != client) {
+//			return r = new ResultBean(5005,false,"客户不存在",null);
+//		}
 		//一个客户只能有一张床位
 		Bed b = bedRepository.findByAid2(aid);
 		if (null != b) {
