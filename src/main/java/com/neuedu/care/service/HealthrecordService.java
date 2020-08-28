@@ -22,7 +22,7 @@ public interface HealthrecordService {
 	Healthrecord findByRid(Integer rid);
 	
 	/**
-	 * 根据档案编号，老人编号，老人姓名模糊查询
+	 * 根据档案编号，客户编号，客户姓名模糊查询
 	 * 
 	 */
 	

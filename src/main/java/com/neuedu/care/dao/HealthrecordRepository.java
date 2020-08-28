@@ -38,7 +38,7 @@ public interface HealthrecordRepository extends JpaRepository<Healthrecord, Inte
 	Healthrecord findByRid(Integer rid);
 
 	/**
-	 * 档案编号，老人编号，老人姓名模糊查询
+	 * 档案编号，客户编号，客户姓名模糊查询
 	 */
 	@Transactional
 	@Query(nativeQuery = true,value = "select r.rid,r.aid,c.aname,r.bpressure,r.bfat,r.bsugar,r.heartrate "

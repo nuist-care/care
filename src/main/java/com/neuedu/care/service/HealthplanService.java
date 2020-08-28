@@ -26,7 +26,7 @@ public interface HealthplanService {
 	List<Healthplan> findAllHealthplan();
 	
 	/**
-	 * 根据健康计划编号，老人编号，老人姓名模糊查询
+	 * 根据健康计划编号，客户编号，客户姓名模糊查询
 	 * 
 	 */
 	List<Healthplan> findByPidAidAname(Integer pid,Integer aid,String aname);

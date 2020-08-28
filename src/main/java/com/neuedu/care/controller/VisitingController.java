@@ -51,7 +51,7 @@ public class VisitingController {
 	@GetMapping(value = "/visitinglist")
 	public ResultBean list() {
 		List<Visiting> visitings=visitingService.findAllVisiting();
-		System.out.println("请求所有部门信息为："+visitings);
+		System.out.println("请求所有信息为："+visitings);
 		ResultBean r=new ResultBean(200, true, "查询所有信息成功", visitings);
 		return r;
 	}
@@ -66,14 +66,14 @@ public class VisitingController {
 		if(bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for(FieldError f:bindingResult.getFieldErrors()) {
-				msg.append(f.getField()+":"+f.getDefaultMessage()+"\n");
+				msg.append(f.getDefaultMessage()+"\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
 		Client client=clientService.findByid(visiting.getAid());
 		if(client==null) {
-			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			r = new ResultBean(5000, false, "客户编号不存在!", null);
 			return r;
 		}
 		
@@ -97,14 +97,14 @@ public class VisitingController {
 			// 将无法通过数据校验的信息，合并成一个字符串，返回给前端
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
+				msg.append(f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
 		Client client=clientService.findByid(visiting.getAid());
 		if(client==null) {
-			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			r = new ResultBean(5000, false, "客户编号不存在!", null);
 			return r;
 		}
 		boolean flag = visitingService.updateVisiting(vid, visiting.getAid(), visiting.getVhospital(), visiting.getVtime(), visiting.getVroom(), visiting.getVresult());

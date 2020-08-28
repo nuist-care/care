@@ -8,7 +8,7 @@ import com.neuedu.care.entity.Medicine;
 
 public interface MedicineService {
 	/**
-	 * 根据药名，老人姓名模糊查询
+	 * 根据药名，客户姓名模糊查询
 	 * 
 	 */
 	List<Medicine> findByMnameAname(String mname,String aname);
