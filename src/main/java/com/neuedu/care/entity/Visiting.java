@@ -51,7 +51,7 @@ public class Visiting implements Serializable {
 	/** 
 	 * 病人编号 
 	 */
-	@ApiModelProperty(value = "病人编号 ")
+	@ApiModelProperty(value = "客户编号 ")
 	@Column(name="aid",table = "visiting")	
 	@Range(min = 10000,message = "老人编号错误！")
 	private Integer aid;
@@ -59,7 +59,7 @@ public class Visiting implements Serializable {
 	/**
 	 * 病人姓名
 	 */
-	@ApiModelProperty(value = "病人姓名")
+	@ApiModelProperty(value = "客户姓名")
 	@Column(name="aname",table = "client")
 	@Length(min = 1,message = "老人名字不合法")
 	private String aname;

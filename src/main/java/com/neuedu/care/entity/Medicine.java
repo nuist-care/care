@@ -90,7 +90,7 @@ public class Medicine implements Serializable{
 	/**
 	 * 老人编号
 	 */
-	@ApiModelProperty(value = "老人编号")
+	@ApiModelProperty(value = "客户编号")
 	@Range(min = 10000,message = "老人编号错误！")
 	@Column(name = "aid", table = "medicinerecord")
 	private Integer aid;

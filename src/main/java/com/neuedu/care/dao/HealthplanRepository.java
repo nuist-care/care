@@ -37,7 +37,7 @@ public interface HealthplanRepository extends JpaRepository<Healthplan, Integer>
 	Healthplan findByPid(Integer pid);
 	
 	/**
-	 * 评估编号，老人编号，老人姓名模糊查询
+	 * 评估编号，客户编号，客户姓名模糊查询
 	 */
 	@Transactional
 	@Query(nativeQuery = true,value = "select p.pid,p.aid,p.eid,c.aname,e.ename,p.phycondition,p.plan,p.recoverydays "

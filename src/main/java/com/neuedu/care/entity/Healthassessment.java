@@ -46,19 +46,19 @@ public class Healthassessment implements Serializable{
 	private Integer assid;
 	
 	/** 
-	 * 病人编号 
+	 * 客户编号 
 	 */
-	@ApiModelProperty(value = "病人编号")
+	@ApiModelProperty(value = "客户编号")
 	@Column(name="aid",table = "healthassessment")	
-	@Range(min = 10000,message = "老人编号错误！")
+	@Range(min = 10000,message = "客户编号错误！")
 	private Integer aid;
 	
 	/**
-	 * 病人姓名
+	 * 客户姓名
 	 */
-	@ApiModelProperty(value = "病人姓名")
+	@ApiModelProperty(value = "客户姓名")
 	@Column(name="aname",table = "client")
-	@Length(min = 1,message = "名字不合法")
+	@Length(min = 1,message = "客户名字不合法")
 	private String aname;
 	
 	/**
