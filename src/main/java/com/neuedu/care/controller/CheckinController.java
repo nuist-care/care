@@ -147,14 +147,25 @@ public class CheckinController {
 	 */
 	@ApiOperation(value = "新增入住记录")
 	@PostMapping(value = "/insert")
-	public ResultBean insert(@Validated Checkin checkin,BindingResult bindingResult) {
+	public ResultBean insert(Checkin checkin) {
 		ResultBean r = new ResultBean();
-		if (bindingResult.hasErrors()) {
-			StringBuffer msg = new StringBuffer();
-			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getDefaultMessage()+"\n");
-			}
-			r = new ResultBean(5004,false,msg.toString(),null);
+		String msg= "";
+		if (checkin.getAname() == "") 
+			msg+="姓名不能为空"+"\n";		
+		if (checkin.getAsex() == "") 
+			msg+="性别不能为空"+"\n";		
+		if (checkin.getAage() == null) 
+			msg+="年龄不能为空"+"\n";
+		if (checkin.getAIDnumber() == "") 
+			msg+="身份证号码不能为空"+"\n";
+		if (checkin.getAIDnumber().length() != 18) 
+			msg+="身份证号码长度错误"+"\n";
+		if (checkin.getAtelephone() == "") 
+			msg+="电话号码不能为空"+"\n";
+		if (checkin.getAtelephone().length() != 11) 
+			msg+="电话号码长度错误"+"\n";
+		if (msg != "") {
+			r = new ResultBean(5004,false,msg,null);
 			return r;
 		}
 		int line = checkinService.insert(checkin.getIntime(), checkin.getOuttime(), checkin.getAname(), checkin.getAsex(),checkin.getAage(), 
