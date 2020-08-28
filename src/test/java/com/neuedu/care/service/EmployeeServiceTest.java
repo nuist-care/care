@@ -55,7 +55,7 @@ class EmployeeServiceTest {
 	@Test
 	void test_findCondition() {
 		String ename = "y";
-		List<Employee> employees = employeeService.findCondition(10001, "", "");
+		List<Employee> employees = employeeService.findCondition(null, "", "");
 		for (Employee employee : employees) {
 			log.info(employee.toString());
 		}

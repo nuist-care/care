@@ -100,10 +100,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 	
 	/**
-	 * 查询所有医生和护工的信息 by马梦瑶
+	 * 查询所有医生和护工的信息  by马梦瑶
 	 */
 	@Override
-	public List<Employee> findAllByPosition() {
-		return employeeRepository.findAllByPosition();
+	public Page<Employee> findAllByPosition(Pageable pageable) {
+		Page<Employee> ePage = employeeRepository.findAllByPosition(pageable);
+		return ePage;
 	}	
 }

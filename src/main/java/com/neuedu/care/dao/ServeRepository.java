@@ -38,7 +38,10 @@ public interface ServeRepository extends JpaRepository<Serve, Integer>{
 	/**
 	 * 根据员工姓名、客户姓名进行多条件模糊查询
 	 */
-	@Query(nativeQuery = true, value = "select serve.serveid,employee.eid,employee.ename,employee.etelephone,employee.position,client.aid,client.aname FROM employee,client,serve WHERE employee.eid = serve.eid AND client.aid = serve.aid AND employee.ename like concat ('%', ?1, '%') AND client.aname like concat ('%', ?2, '%') AND (employee.position = '医生' OR employee.position = '护工')")
+	@Query(nativeQuery = true, value = "select serve.serveid,employee.eid,employee.ename,employee.etelephone,employee.position,client.aid,client.aname "
+			+ "FROM employee,client,serve "
+			+ "WHERE employee.eid = serve.eid AND client.aid = serve.aid AND employee.ename like concat ('%', ?1, '%') "
+			+ "AND client.aname like concat ('%', ?2, '%') AND (employee.position = '医生' OR employee.position = '护工')")
 	List<Serve> findByEnameContainingAndAnameContaining(@Param("ename") String ename, @Param("aname") String aname);
 	
 	/**

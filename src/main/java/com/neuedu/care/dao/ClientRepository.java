@@ -21,6 +21,14 @@ import com.neuedu.care.entity.Client;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer>{
 	
+	/**
+	 * 根据编号查询客户名称
+	 * @param aid
+	 * @return
+	 */
+	@Query(nativeQuery = true,value = "select aname from client where aid = ?1")
+	String findByAid2(Integer aid);
+	
 	Page<Client> findAll(Pageable pageable);
 	/**
 	 * 根据编号查询一个客户

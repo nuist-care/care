@@ -59,8 +59,15 @@ public class GoController {
 	 */
 	@ApiOperation(value = "根据外出记录编号客户编号和审批人查询外出记录")
 	@GetMapping(value = "/find")
-	public ResultBean find(Integer gid,Integer aid,@RequestParam(defaultValue = "不存在")String approver) {
-		System.out.println(approver);
+	public ResultBean find(Integer gid,Integer aid,String approver) {
+		boolean flag = false;
+		if (approver == "") {
+			approver = "不存在";
+			flag = true;
+		}
+		if (gid == null && aid == null &&flag) {
+			approver = "";
+		}
 		List<Go> gos= goService.findByCondition(gid, aid, approver);
 		if (gos != null) {
 			return  new ResultBean(200,true,"查询所有客户信息成功",gos);

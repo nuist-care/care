@@ -59,11 +59,11 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer>{
 	List<Employee> findByEidOrEnameContainingOrPosition(@Param("eid")Integer eid,@Param("ename")String ename,@Param("position")String position);
 	
 	/**
-	 * 查询所有医生和护工的信息 by马梦瑶
+	 * 查询所有医生和护工的信息  by马梦瑶
 	 * @return
 	 */
 	@Query(nativeQuery = true, value = "select * from employee where position = '护工' or position = '医生'")
-	List<Employee> findAllByPosition();
+	Page<Employee> findAllByPosition(Pageable pageable);
 	
 	/**
 	 * 更新员工信息

@@ -61,8 +61,13 @@ public class ClientController {
 	@ApiOperation(value = "多条件组合查询客户信息")
 	@GetMapping(value = "/find")
 	public ResultBean find(Integer aid,String aname,Integer clevel) {
+		boolean falg = false;
 		if (aname == "") {
 			aname = "不存在";
+			falg = true;
+		}
+		if (aid == null && clevel == null && falg) {
+			aname = "";
 		}
 		List<Client> clients= clientService.findByCondition(aid, aname, clevel);
 		ResultBean r = new ResultBean(200,true,"查询所有客户信息成功",clients);
@@ -70,11 +75,11 @@ public class ClientController {
 	}
 	
 	/**
-	 * 删除一个员工信息
+	 * 删除一个客户信息
 	 * @param eid
 	 * @return
 	 */
-	@ApiOperation(value = "删除一个员工信息")
+	@ApiOperation(value = "删除一个客户信息")
 	@DeleteMapping(value = "/delete/{aid}")
 	public ResultBean delete(@PathVariable("aid")Integer aid) {
 		int line = clientService.delete(aid);
@@ -88,19 +93,19 @@ public class ClientController {
 	}
 	
 	/**
-	 * 新增员工
+	 * 新增客户
 	 * @param employee
 	 * @param bindingResult
 	 * @return
 	 */
-	@ApiOperation(value = "新增员工")
+	@ApiOperation(value = "新增客户")
 	@PostMapping(value = "/insert")
 	public ResultBean insert(@Validated Client client,BindingResult bindingResult) {
 		ResultBean r = new ResultBean();
 		if (bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField()+": "+f.getDefaultMessage()+"\n");
+				msg.append(f.getDefaultMessage()+"\n");
 			}
 			r = new ResultBean(5004,false,msg.toString(),null);
 			return r;
@@ -115,11 +120,11 @@ public class ClientController {
 	}
 	
 	/**
-	 * 显示一个员工信息界面
+	 * 显示一个客户信息界面
 	 * @param eid
 	 * @return
 	 */
-	@ApiOperation(value = "显示一个员工信息界面")
+	@ApiOperation(value = "显示一个客户信息界面")
 	@GetMapping(value = "/{aid}")
 	public ResultBean detail(@PathVariable("aid")Integer aid) {
 		Client client = clientService.findByid(aid);
@@ -128,13 +133,13 @@ public class ClientController {
 	}
 	
 	/**
-	 * 更新一个员工信息
+	 * 更新一个客户信息
 	 * @param id
 	 * @param employee
 	 * @param bindingResult
 	 * @return
 	 */
-	@ApiOperation(value = "更新一个员工信息")
+	@ApiOperation(value = "更新一个客户信息")
 	@PutMapping(value = "/update/{aid}")
 	public ResultBean update(@PathVariable("aid")String aid,@Validated Client client,BindingResult bindingResult) {
 		ResultBean r = new ResultBean();
