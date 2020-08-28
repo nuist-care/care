@@ -45,13 +45,13 @@ public class Healthplan implements Serializable{/**
 	private Integer pid;
 	
 	@ApiModelProperty(value = "客户编号")
-	@NotNull
+	@NotNull(message = "客户编号不能为空")
 	@Range(min = 10000,message = "客户编号错误！")
 	@Column(name = "aid", table = "healthplan")
 	private Integer aid;
 	
 	@ApiModelProperty(value = "医生编号")
-	@NotNull
+	@NotNull(message = "医生编号不能为空")
 	@Range(min = 10000,message = "医生编号错误！")
 	@Column(name = "eid", table = "healthplan")
 	private Integer eid;

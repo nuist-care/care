@@ -46,14 +46,14 @@ public class Placard implements Serializable{
 	/**
 	 * 公告作者
 	 */
-	@NotBlank
+	@NotBlank(message = "公告作者不能为空")
 	@Column(name = "pauthor")
 	private String pauthor;
 	
 	/**
 	 * 公告类型
 	 */
-	@NotBlank
+	@NotBlank(message = "公告类型不能为空")
 	@Column(name = "ptype")
 	private String ptype;
 	

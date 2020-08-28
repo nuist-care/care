@@ -58,14 +58,14 @@ public class Food implements Serializable{
 	/**
 	 * 用餐类型
 	 */
-	@NotBlank
+	@NotBlank(message = "用餐类型不能为空")
 	@Column(name = "ftype")
 	private String ftype;
 	
 	/**
 	 * 用餐内容
 	 */
-	@NotBlank
+	@NotBlank(message = "用餐内容不能为空")
 	@Column(name = "fcontent")
 	private String fcontent;
 }

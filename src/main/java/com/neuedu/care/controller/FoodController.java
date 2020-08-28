@@ -64,7 +64,7 @@ public class FoodController {
 		if (bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
+				msg.append(f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(500, false, msg.toString(), null);
 			return r;
@@ -106,7 +106,7 @@ public class FoodController {
 		if (bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
+				msg.append(f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(500, false, msg.toString(), null);
 			return r;
