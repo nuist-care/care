@@ -44,9 +44,9 @@ public class Healthplan implements Serializable{/**
 	@Column(name = "pid", table = "healthplan")
 	private Integer pid;
 	
-	@ApiModelProperty(value = "老人编号")
+	@ApiModelProperty(value = "客户编号")
 	@NotNull
-	@Range(min = 10000,message = "老人编号错误！")
+	@Range(min = 10000,message = "客户编号错误！")
 	@Column(name = "aid", table = "healthplan")
 	private Integer aid;
 	
@@ -56,8 +56,8 @@ public class Healthplan implements Serializable{/**
 	@Column(name = "eid", table = "healthplan")
 	private Integer eid;
 	
-	@ApiModelProperty(value = "老人姓名")
-	@Length(min = 1,message = "老人名字不合法")
+	@ApiModelProperty(value = "客户姓名")
+	@Length(min = 1,message = "客户名字不合法")
 	@Column(name = "aname", table = "client")
 	private String aname;
 	

@@ -29,7 +29,7 @@ public interface HealthassessmentService {
 	List<Healthassessment> findAllHealthassessment();
 	
 	/**
-	 * 通过评估编号，用户编号，用户名模糊查询健康评估
+	 * 通过评估编号，客户编号，客户名模糊查询健康评估
 	 * 
 	 */
 	

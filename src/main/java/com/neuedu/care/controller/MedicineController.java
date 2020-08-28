@@ -37,13 +37,13 @@ public class MedicineController {
 	ClientService clientService;
 	
 	/**
-	 * 根据药名，老人名模糊查询
+	 * 根据药名，客户名模糊查询
 	 */
-	@ApiOperation(value = "根据药名，老人名模糊查询医嘱")
+	@ApiOperation(value = "根据药名，客户名模糊查询医嘱")
 	@GetMapping(value = "/find")
 	public ResultBean find(String mname,String aname) {
 		List<Medicine> medicines = medicineService.findByMnameAname(mname, aname);
-		System.out.println("请求所有部门信息为："+medicines);
+		System.out.println("请求所有信息为："+medicines);
 		ResultBean r=new ResultBean(200,true,"组合模糊查询成功",medicines);
 		return r;
 	}
@@ -70,7 +70,7 @@ public class MedicineController {
 		if(bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for(FieldError f:bindingResult.getFieldErrors()) {
-				msg.append(f.getField()+":"+f.getDefaultMessage()+"\n");
+				msg.append(f.getDefaultMessage()+"\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
@@ -81,7 +81,7 @@ public class MedicineController {
 		System.out.println(drug.getMid());
 		Client client=clientService.findByid(medicine.getAid());
 		if(client==null) {
-			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			r = new ResultBean(5000, false, "客户编号不存在!", null);
 			return r;
 		}
 		boolean flag2=medicineService.addMedicinerecord(medicine.getAid(), drug.getMid());
@@ -106,14 +106,14 @@ public class MedicineController {
 			// 将无法通过数据校验的信息，合并成一个字符串，返回给前端
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
+				msg.append(f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
 		Client client=clientService.findByid(medicine.getAid());
 		if(client==null) {
-			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			r = new ResultBean(5000, false, "客户编号不存在!", null);
 			return r;
 		}
 		boolean flag = medicineService.updateMedicine(mid, medicine.getMname(), medicine.getMsize(), medicine.getPrescribedtime());

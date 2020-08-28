@@ -25,7 +25,7 @@ public interface VisitingService {
 	 */
 	List<Visiting> findAllVisiting();
 	/**
-	 * 根据就诊编号，老人编号，老人姓名模糊查询
+	 * 根据就诊编号，客户编号，客户姓名模糊查询
 	 * 
 	 */
 	List<Visiting> findByVidAidAname(Integer vid,Integer aid,String aname);

@@ -60,7 +60,7 @@ public class HealthrecordController {
 	/**
 	 * 模糊查询
 	 */
-	@ApiOperation(value = "根据档案编号，老人编号，老人姓名信息模糊查询健康计划信息")
+	@ApiOperation(value = "根据档案编号，客户编号，客户姓名信息模糊查询健康计划信息")
 	@GetMapping(value = "/find")
 	public ResultBean find(Integer rid,Integer aid,String aname) {
 		List<Healthrecord> healthrecords = healthrecordService.findByRidAidAname(rid, aid, aname);
@@ -79,14 +79,14 @@ public class HealthrecordController {
 		if(bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for(FieldError f:bindingResult.getFieldErrors()) {
-				msg.append(f.getField()+":"+f.getDefaultMessage()+"\n");
+				msg.append(f.getDefaultMessage()+"\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
 		Client client=clientService.findByid(healthrecord.getAid());
 		if(client==null) {
-			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			r = new ResultBean(5000, false, "客户编号不存在!", null);
 			return r;
 		}
 		boolean flag=healthrecordService.addHealthrecord(healthrecord.getAid(), 
@@ -111,14 +111,14 @@ public class HealthrecordController {
 			// 将无法通过数据校验的信息，合并成一个字符串，返回给前端
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
+				msg.append(f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
 		Client client=clientService.findByid(healthrecord.getAid());
 		if(client==null) {
-			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			r = new ResultBean(5000, false, "客户编号不存在!", null);
 			return r;
 		}
 		boolean flag = healthrecordService.updateHealthrecord(rid, healthrecord.getAid(), 

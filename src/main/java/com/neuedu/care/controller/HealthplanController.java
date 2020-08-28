@@ -45,7 +45,7 @@ public class HealthplanController {
 	@GetMapping(value = "/healthplanlist")
 	public ResultBean list() {
 		List<Healthplan> healthplans=healthplanService.findAllHealthplan();
-		System.out.println("请求所有部门信息为："+healthplans);
+		System.out.println("请求所有信息为："+healthplans);
 		ResultBean r=new ResultBean(200, true, "查询所有信息成功", healthplans);
 		return r;
 	}
@@ -69,7 +69,7 @@ public class HealthplanController {
 	@GetMapping(value = "/find")
 	public ResultBean find(Integer pid,Integer aid,String aname) {
 		List<Healthplan> healthplans = healthplanService.findByPidAidAname(pid, aid, aname);
-		System.out.println("请求所有部门信息为："+healthplans);
+		System.out.println("请求所有信息为："+healthplans);
 		ResultBean r=new ResultBean(200,true,"组合模糊查询成功",healthplans);
 		return r;
 	}
@@ -84,14 +84,14 @@ public class HealthplanController {
 		if(bindingResult.hasErrors()) {
 			StringBuffer msg = new StringBuffer();
 			for(FieldError f:bindingResult.getFieldErrors()) {
-				msg.append(f.getField()+":"+f.getDefaultMessage()+"\n");
+				msg.append(f.getDefaultMessage()+"\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
 		Client client=clientService.findByid(healthplan.getAid());
 		if(client==null) {
-			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			r = new ResultBean(5000, false, "客户编号不存在!", null);
 			return r;
 		}
 		Employee employee=employeeService.findByEid(healthplan.getEid());
@@ -120,14 +120,14 @@ public class HealthplanController {
 			// 将无法通过数据校验的信息，合并成一个字符串，返回给前端
 			StringBuffer msg = new StringBuffer();
 			for (FieldError f : bindingResult.getFieldErrors()) {
-				msg.append(f.getField() + ":" + f.getDefaultMessage() + "\n");
+				msg.append( f.getDefaultMessage() + "\n");
 			}
 			r = new ResultBean(5006, false, msg.toString(), null);
 			return r;
 		}
 		Client client=clientService.findByid(healthplan.getAid());
 		if(client==null) {
-			r = new ResultBean(5000, false, "老人编号不存在!", null);
+			r = new ResultBean(5000, false, "客户编号不存在!", null);
 			return r;
 		}
 		Employee employee=employeeService.findByEid(healthplan.getEid());
